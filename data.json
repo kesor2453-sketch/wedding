@@ -115,7 +115,10 @@
     }
   ],
   "custom": [],
-  "hidden": {},
+  "hidden": {
+    "story": true,
+    "qr": true
+  },
   "openFx": "gate",
   "fontDisplay": "Moul",
   "fontBody": "Battambang",
