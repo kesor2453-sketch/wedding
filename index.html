@@ -503,9 +503,9 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .tile:hover{transform:translateY(-2px); box-shadow:0 8px 18px -10px rgba(0,0,0,.7)}
 .tile:focus-visible{outline:2px solid var(--gold-soft); outline-offset:3px}
 .edtop .ic{font-size:26px; line-height:1; flex:none}
-.hs{display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch}
+.hs{display:flex; overflow-x:auto; scroll-behavior:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch}
 .hs::-webkit-scrollbar{display:none}
-.hs > .page{flex:0 0 100%; width:100%; scroll-snap-align:start; scroll-snap-stop:always; height:calc(100vh - 190px); height:calc(100dvh - 190px); min-height:420px; overflow-y:auto; overscroll-behavior-y:contain}
+.hs > .page{flex:0 0 100%; width:100%; min-width:100%; margin:0; scroll-snap-align:start; scroll-snap-stop:always; height:calc(100vh - 190px); height:calc(100dvh - 190px); min-height:420px; overflow-y:auto; overscroll-behavior-y:contain}
 .hs > .page.has-cover{min-height:420px}
 /* guest manager */
 .guests .gv .inner{gap:14px; padding-top:40px}
@@ -1570,7 +1570,9 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   function edGo(i, smooth){
     var hs = document.getElementById("hs"); if (!hs) return;
     EDIDX = Math.max(0, Math.min(edCount() - 1, i));
-    hs.scrollTo({left: EDIDX * hs.clientWidth, behavior: smooth === false ? "auto" : "smooth"}); edSync();
+    if (smooth === false) { hs.style.scrollSnapType = "none"; hs.scrollLeft = EDIDX * hs.clientWidth; requestAnimationFrame(function(){ hs.style.scrollSnapType = ""; }); }
+    else hs.scrollTo({left: EDIDX * hs.clientWidth, behavior: "smooth"});
+    edSync();
   }
   function edSync(){
     var nm = document.getElementById("ed-name"); if (nm) nm.textContent = kn(EDIDX + 1) + "/" + kn(edCount()) + " · " + (EDLABELS[EDIDX] || "");
@@ -1578,7 +1580,11 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   }
   function edRestore(){
     var hs = document.getElementById("hs"); if (!hs) return;
-    requestAnimationFrame(function(){ hs.scrollLeft = Math.min(EDIDX, edCount() - 1) * hs.clientWidth; edSync(); });
+    // open straight on the chosen page: no sideways slide, no half-pages
+    hs.style.visibility = "hidden"; hs.style.scrollSnapType = "none";
+    var place = function(){ hs.scrollLeft = Math.min(EDIDX, edCount() - 1) * hs.clientWidth; };
+    place();
+    requestAnimationFrame(function(){ place(); requestAnimationFrame(function(){ place(); hs.style.scrollSnapType = ""; hs.style.visibility = ""; edSync(); }); });
     hs.addEventListener("scroll", function(){ clearTimeout(edT); edT = setTimeout(function(){ EDIDX = Math.round(hs.scrollLeft / Math.max(1, hs.clientWidth)); edSync(); }, 80); }, {passive: true});
   }
   function edShowEl(el){
