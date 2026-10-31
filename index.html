@@ -297,10 +297,11 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 <script>
 (function(){
   var DEFAULTS = JSON.parse(document.getElementById("state").textContent), S = DEFAULTS;
-  var GUEST = ""; try { GUEST = (new URLSearchParams(location.search).get("to") || "").trim().slice(0, 80); } catch(e){}
+  // guest name comes from a short code (?g=k7p2) looked up in the saved guest list; ?to=name still works for old links
+  var GUEST = "", GCODE = ""; try { var QS = new URLSearchParams(location.search); GUEST = (QS.get("to") || "").trim().slice(0, 80); GCODE = (QS.get("g") || "").trim().slice(0, 12); } catch(e){}
   var OWNER = false; // becomes true only after the GitHub token is verified to have write access
   var LOCAL = {}, PENDING = {}, INBOX = null, unsubAuth = null, unsubSnap = null;
-  function normalize(){ if (!S.sec) S.sec = 6; ["music","cdPhoto","cover","video","videoLink","qr","introPhoto"].forEach(function(k){ if (S[k] == null) S[k] = ""; }); if (!S.theme) S.theme = "silk"; if (!Array.isArray(S.photos)) S.photos = []; delete S.wishesApi; if (S.fb === undefined) S.fb = null; }
+  function normalize(){ if (!S.sec) S.sec = 6; ["music","cdPhoto","cover","video","videoLink","qr","introPhoto"].forEach(function(k){ if (S[k] == null) S[k] = ""; }); if (!S.theme) S.theme = "silk"; if (!Array.isArray(S.photos)) S.photos = []; if (!S.guests || typeof S.guests !== "object") S.guests = {}; delete S.wishesApi; if (S.fb === undefined) S.fb = null; }
   normalize();
   var app = document.getElementById("app");
   var mode = "play", editing = false, dirty = false, busy = 0;
@@ -862,7 +863,20 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var ta = document.getElementById("g-names"), box = document.getElementById("g-links"); if (!ta || !box) return;
     var seen = {}, names = ta.value.split(/[\n,،]+/).map(function(x){ return x.trim(); }).filter(function(x){ if (!x || seen[x]) return false; seen[x] = 1; return true; });
     if (!names.length) { box.innerHTML = quiet ? "" : '<p class="lunar">សូមសរសេរឈ្មោះភ្ញៀវជាមុនសិន</p>'; LINKS = []; return; }
-    LINKS = names.map(function(nm){ return {name: nm, link: baseUrl() + "?to=" + encodeURIComponent(nm), text: "សូមគោរពអញ្ជើញ " + nm + " ចូលរួមពិធីអាពាហ៍ពិពាហ៍ " + S.groom + " និង " + S.bride}; });
+    // give every guest a short code; new codes are saved to data.json so the link can show the name
+    var byName = {}, added = 0; Object.keys(S.guests).forEach(function(k){ byName[S.guests[k]] = k; });
+    if (!quiet) names.forEach(function(nm){
+      if (byName[nm]) return;
+      var id; do { id = Math.random().toString(36).slice(2, 6); } while (S.guests[id] || !/^[a-z]/.test(id));
+      S.guests[id] = nm; byName[nm] = id; added++;
+    });
+    LINKS = names.filter(function(nm){ return byName[nm]; }).map(function(nm){ return {name: nm, link: baseUrl() + "?g=" + byName[nm], text: "សូមគោរពអញ្ជើញ " + nm + " ចូលរួមពិធីអាពាហ៍ពិពាហ៍ " + S.groom + " និង " + S.bride}; });
+    if (added) {
+      markDirty();
+      var sb = document.getElementById("b-save");
+      if (sb && !busy) { save(sb); toast("កំពុងរក្សាទុកលីងថ្មី " + kn(added) + "… រង់ចាំ ១–២ នាទី មុនផ្ញើ"); }
+    }
+    if (!LINKS.length) { box.innerHTML = quiet ? "" : '<p class="lunar">សូមចុច «បង្កើតលីងទាំងអស់»</p>'; return; }
     box.innerHTML = '<p class="lunar" style="margin:0">បានបង្កើត ' + kn(LINKS.length) + ' លីង</p>' + LINKS.map(function(l, i){
       var done = sentLog()[l.name];
       return '<div class="link-row' + (done ? " sent" : "") + '"><b>' + kn(i + 1) + ". " + esc(l.name) + (done ? ' <small class="ok">✓ បានផ្ញើតាម ' + esc(done) + "</small>" : "") + '</b><code>' + esc(l.link) + '</code><div class="share">' +
@@ -870,6 +884,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<button class="sh ms" data-act="share" data-via="messenger" data-i="' + i + '">Messenger</button>' +
         '<button class="sh ig" data-act="share" data-via="instagram" data-i="' + i + '">Instagram</button>' +
         '<button class="sh cp" data-act="share" data-via="copy" data-i="' + i + '">' + I.copy + " ចម្លង</button>" +
+        '<button class="sh cp" data-act="share" data-via="rich" data-i="' + i + '" title="បិទភ្ជាប់ក្នុង Telegram លើកុំព្យូទ័រ៖ ឃើញតែអក្សរ ចុចបាន">ចម្លងអក្សរមានលីងលាក់</button>' +
         (navigator.share ? '<button class="sh cp" data-act="share" data-via="more" data-i="' + i + '">ផ្សេងៗ…</button>' : "") +
         "</div></div>";
     }).join("");
@@ -897,6 +912,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var msg = l.text + "\n" + l.link;
     if (VIA[via] && !b.dataset.ok) { askConfirm(l, via, function(){ b.dataset.ok = "1"; sendVia(via, i, b); delete b.dataset.ok; }); return; }
     if (via === "copy") copyText(msg, b);
+    else if (via === "rich") copyRich(l, b);
     else if (via === "telegram") window.open("https://t.me/share/url?url=" + encodeURIComponent(l.link) + "&text=" + encodeURIComponent(l.text), "_blank", "noopener");
     else if (via === "more") navigator.share({title: document.title, text: l.text, url: l.link}).catch(function(){});
     else if (via === "messenger") {
@@ -905,6 +921,14 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     } else if (via === "instagram") {
       copyRaw(msg).then(function(){ toast("បានចម្លងសារ — បើក Instagram ហើយបិទភ្ជាប់ក្នុងសារ"); window.open("https://www.instagram.com/direct/inbox/", "_blank", "noopener"); });
     }
+  }
+  // copy the invitation sentence as a hyperlink: the name text is clickable and the address stays hidden (Telegram desktop/web, Gmail, Word)
+  function copyRich(l, b){
+    var html = '<a href="' + esc(l.link) + '">' + esc(l.text) + "</a>";
+    var done = function(){ var o = b.innerHTML; b.textContent = "បានចម្លង ✓"; setTimeout(function(){ b.innerHTML = o; }, 1500); };
+    if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+      navigator.clipboard.write([new ClipboardItem({"text/html": new Blob([html], {type: "text/html"}), "text/plain": new Blob([l.text + "\n" + l.link], {type: "text/plain"})})]).then(done, function(){ copyRaw(l.text + "\n" + l.link).then(done); });
+    } else copyRaw(l.text + "\n" + l.link).then(done);
   }
   function copyRaw(t){
     if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t).catch(function(){ return legacyCopy(t); });
@@ -1161,6 +1185,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   window.addEventListener("beforeunload", function(e){ if (dirty) { e.preventDefault(); e.returnValue = ""; } });
   fetch("data.json?v=" + Date.now(), {cache: "no-store"}).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }).then(function(data){
     if (data) { if (!data.fb) delete data.fb; S = Object.assign({}, DEFAULTS, data); normalize(); }
+    if (GCODE && S.guests[GCODE]) GUEST = String(S.guests[GCODE]).slice(0, 80);
     render();
     var G = gh(), remembered = false; try { remembered = localStorage.getItem("owner") === "1"; } catch(e){}
     if (remembered && G.repo && G.token) {
