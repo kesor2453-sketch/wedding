@@ -82,12 +82,13 @@
     "messagingSenderId": "543176480789",
     "appId": "1:543176480789:web:749607d717d699aedb561c"
   },
+  "mapQuery": "11.730006149380863, 105.36884299974918",
   "cdPhoto": "",
   "introPhoto": "",
   "introVideo": "",
   "qrLogo": "",
   "guideImg": "",
-  "theme": "jade",
+  "theme": "navy",
   "story": [
     {
       "date": "",
@@ -131,5 +132,27 @@
   },
   "guide": "none",
   "ornament": "khmer",
-  "textFx": "zoom"
+  "textFx": "zoom",
+  "nav": [
+    {
+      "k": "date",
+      "l": "ថ្ងៃខែ",
+      "i": "cal"
+    },
+    {
+      "k": "schedule",
+      "l": "កម្មវិធី",
+      "i": "clock"
+    },
+    {
+      "k": "wishes",
+      "l": "ជូនពរ",
+      "i": "chat"
+    },
+    {
+      "k": "venue",
+      "l": "ទីតាំង",
+      "i": "pin"
+    }
+  ]
 }
