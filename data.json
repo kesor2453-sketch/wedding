@@ -84,9 +84,46 @@
   },
   "cdPhoto": "",
   "introPhoto": "",
+  "introVideo": "",
+  "qrLogo": "",
+  "guideImg": "",
   "theme": "jade",
+  "story": [
+    {
+      "date": "",
+      "title": "ជួបគ្នាលើកដំបូង",
+      "text": "",
+      "img": ""
+    },
+    {
+      "date": "",
+      "title": "ចាប់ផ្តើមស្រឡាញ់គ្នា",
+      "text": "",
+      "img": ""
+    },
+    {
+      "date": "",
+      "title": "ពិធីភ្ជាប់ពាក្យ",
+      "text": "",
+      "img": ""
+    },
+    {
+      "date": "",
+      "title": "ថ្ងៃរៀបការ",
+      "text": "",
+      "img": ""
+    }
+  ],
+  "custom": [],
+  "hidden": {},
+  "openFx": "gate",
+  "fontDisplay": "Moul",
+  "fontBody": "Battambang",
+  "titleScale": 100,
+  "textScale": 100,
   "guests": {
     "jd9x": "កញ្ញា ផាន្នី ស្រីនិត",
     "om43": "កញ្ញា រ៉ុម លីនដា"
-  }
+  },
+  "guide": "dove"
 }
