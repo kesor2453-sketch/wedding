@@ -117,7 +117,8 @@
   "custom": [],
   "hidden": {
     "story": true,
-    "qr": true
+    "qr": true,
+    "video": true
   },
   "openFx": "gate",
   "fontDisplay": "Moul",
