@@ -408,6 +408,17 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .st-txt .tool.x{align-self:flex-start; font-size:12px}
 .editing [data-ph]:empty::before{content:attr(data-ph); opacity:.45}
 .editing [data-ph]:empty{display:inline-block; min-width:90px}
+.pgbar{position:relative; z-index:4; display:flex; align-items:center; gap:6px; margin:22px 24px -40px; padding:6px 8px 6px 12px; border:1px dashed var(--edit); border-radius:999px; background:rgba(var(--shade),.85); font-size:13px; color:var(--edit)}
+.pgname{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pgname em{font-style:normal; color:#f3b0a0}
+.pgbar .tool.x{font-size:15px; padding:1px 10px; border:1px dashed var(--edit)}
+.pgbar .tool[disabled]{opacity:.3; cursor:default}
+.pgshow{display:flex; align-items:center; gap:4px; cursor:pointer; white-space:nowrap}
+.pgshow input{width:16px; height:16px; accent-color:var(--gold)}
+.page.pg-off > .inner, .page.pg-off > .corner{opacity:.38}
+.mapbox{position:relative; width:100%; aspect-ratio:4/3; max-width:100%; max-height:34vh; border:2px solid var(--gold); outline:1px solid rgba(217,178,95,.45); outline-offset:3px; border-radius:10px; overflow:hidden; background:rgba(var(--shade),.6)}
+.mapbox iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.mapedit{display:flex; flex-direction:column; gap:10px; text-align:left; padding:10px; border:1px dashed var(--edit); border-radius:8px}
 .order{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
 .order li{display:flex; align-items:center; gap:6px; padding:6px 8px; border:1px solid rgba(126,200,184,.45); border-radius:8px}
 .order li.off{opacity:.55}
@@ -633,11 +644,28 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   }
 
   // ---- pages: each is one "scene" of the invitation film ----
-  function page(inner, opt){ opt = opt || {}; return {html:'<div class="page ' + (opt.cls||"") + '">' + (opt.pre||"") + CORNERS + '<div class="inner">' + vh(inner) + "</div></div>", dur: opt.dur || S.sec, kind: opt.kind || "text", tag: opt.tag || ""}; }
+  var CURKEY = "", BARDONE = {};
+  // in edit view, the first page of each section carries its own ↑ ↓ / show-hide bar
+  function pageBar(){
+    if (!editing || !CURKEY || BARDONE[CURKEY]) return "";
+    BARDONE[CURKEY] = 1; var o = sectionOrder(), i = o.indexOf(CURKEY), off = isHidden(CURKEY);
+    return '<div class="pgbar" data-pg="' + CURKEY + '"><span class="pgname">' + esc(secLabel(CURKEY)) + (off ? ' <em>(លាក់ពីភ្ញៀវ)</em>' : "") + "</span>" +
+      '<button class="tool x" data-act="sec-up" data-k2="' + CURKEY + '"' + (i <= 0 ? " disabled" : "") + ' aria-label="ឡើងលើ">↑</button>' +
+      '<button class="tool x" data-act="sec-down" data-k2="' + CURKEY + '"' + (i >= o.length - 1 ? " disabled" : "") + ' aria-label="ចុះក្រោម">↓</button>' +
+      '<label class="pgshow"><input type="checkbox" data-act="sec-toggle" data-k2="' + CURKEY + '"' + (off ? "" : " checked") + "> បង្ហាញ</label></div>";
+  }
+  function page(inner, opt){ opt = opt || {}; var bar = pageBar(); return {html:'<div class="page ' + (opt.cls||"") + (bar && isHidden(CURKEY) ? " pg-off" : "") + '">' + (opt.pre||"") + CORNERS + bar + '<div class="inner">' + vh(inner) + "</div></div>", dur: opt.dur || S.sec, kind: opt.kind || "text", tag: opt.tag || ""}; }
   var PSTART = {};
   var NAV_ICONS = ["cal","pin","chat","clock","img","gift","heart","qr","play","star"];
   var NAV_DEFAULT = [{k: "date", l: "ថ្ងៃខែ", i: "cal"}, {k: "venue", l: "ទីតាំង", i: "pin"}, {k: "wishes", l: "ជូនពរ", i: "chat"}, {k: "schedule", l: "កម្មវិធី", i: "clock"}];
   function navList(){ return Array.isArray(S.nav) ? S.nav : NAV_DEFAULT.map(function(n){ return {k: n.k, l: n.l, i: n.i}; }); }
+  // a Google map for the venue: coordinates or a place name the owner typed, else coordinates found in the map link, else the venue name and address
+  function mapEmbed(){
+    var q = String(S.mapQuery || "").trim(), u = String(S.map || ""), m;
+    if (!q && (m = u.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || u.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || u.match(/[?&](?:q|ll|query)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/))) q = m[1] + "," + m[2];
+    if (!q) q = [S.venueName, S.venueAddr].filter(Boolean).join(", ");
+    return q ? "https://maps.google.com/maps?q=" + encodeURIComponent(q) + "&z=16&hl=km&output=embed" : "";
+  }
   var SECTIONS = [["parents","មាតាបិតា និងពាក្យអញ្ជើញ"],["story","រឿងស្នេហារបស់យើង"],["date","ថ្ងៃខែ និងទីតាំងពិធី"],["countdown","រាប់ថយក្រោយ"],["schedule","កម្មវិធីសិរីមង្គល"],["photos","រូបភាពអនុស្សាវរីយ៍"],["video","វីដេអូ"],["venue","ទីកន្លែង និងផែនទី"],["gift","ចំណងដៃ"],["wishes","ពាក្យជូនពរ"],["qr","QR ធៀប"],["closing","ពាក្យអរគុណ"]];
   function sectionOrder(){
     var known = SECTIONS.map(function(x){ return x[0]; }).concat(S.custom.map(function(c){ return "c" + c.id; })), o = (Array.isArray(S.order) ? S.order : []).filter(function(k, i, a){ return known.indexOf(k) >= 0 && a.indexOf(k) === i; });
@@ -715,8 +743,14 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     };
     B.venue = function(){
     // 7 venue
-    var map = safeUrl(S.map), c = calUrl();
-    P.push(page(LOTUS + "<h2>ទីកន្លែង</h2>" + '<div class="venue">' + T("p","venueName","moul") + T("p","venueAddr") + "</div>" + '<div class="actions">' +
+    var map = safeUrl(S.map), c = calUrl(), msrc = mapEmbed();
+    var mapBox = S.mapShow === false ? "" : '<div class="mapbox">' + (msrc ? '<iframe src="' + esc(msrc) + '" title="ផែនទីទីកន្លែងពិធី" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>' : "") + "</div>";
+    var mapEdit = editing ? '<div class="settings mapedit">' +
+      '<label for="in-mq">ទីតាំងលើផែនទី (កូអរដោនេ ឬឈ្មោះទីកន្លែង)<input id="in-mq" data-f="mapQuery" value="' + esc(S.mapQuery || "") + '" placeholder="11.5564, 104.9282  ឬ  Sokha Phnom Penh Hotel"></label>' +
+      '<label for="in-map2">លីង Google Maps (សម្រាប់ប៊ូតុង «មើលផែនទី»)<input id="in-map2" type="url" data-f="map" value="' + esc(S.map) + '" placeholder="https://maps.app.goo.gl/…"></label>' +
+      '<label class="chk2" for="in-msh"><input id="in-msh" type="checkbox" data-act="map-show"' + (S.mapShow === false ? "" : " checked") + "> បង្ហាញផែនទីលើទំព័រ</label>" +
+      '<p class="lunar" style="margin:0">គន្លឹះ៖ ក្នុង Google Maps ចុចសង្កត់លើទីតាំង → ចម្លងលេខ (ឧ. 11.5564, 104.9282) មកដាក់ក្នុងប្រអប់ទីមួយ ទើបផែនទីចំគោលដៅបំផុត។</p></div>' : "";
+    P.push(page(LOTUS + "<h2>ទីកន្លែង</h2>" + '<div class="venue">' + T("p","venueName","moul") + T("p","venueAddr") + "</div>" + mapBox + mapEdit + '<div class="actions">' +
       (map ? '<a class="btn solid" href="' + esc(map) + '" target="_blank" rel="noopener">' + I.pin + " មើលផែនទី</a>" : "") +
       (c ? '<a class="btn" href="' + esc(c) + '" target="_blank" rel="noopener">' + I.cal + " ដាក់ក្នុងប្រតិទិន</a>" : "") + "</div>", {dur: sec + 1, tag: "venue"}));
     };
@@ -776,8 +810,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
           (c.text || editing ? T("div", "custom." + ci + ".text", "invite-text") : "") + tools, {dur: sec + 3, tag: "c" + c.id}));
       };
     });
-    PSTART = {cover: 0};
-    sectionOrder().forEach(function(k){ if (B[k] && !isHidden(k)) { var n0 = P.length; B[k](); if (P.length > n0) PSTART[k] = n0; } });
+    PSTART = {cover: 0}; BARDONE = {};
+    sectionOrder().forEach(function(k){ if (B[k] && (!isHidden(k) || editing)) { var n0 = P.length; CURKEY = k; B[k](); CURKEY = ""; if (P.length > n0) PSTART[k] = n0; } });
     // owner settings (edit view only)
     if (editing) {
       P.push(page("<h2>ការកំណត់ (មើលឃើញតែអ្នក)</h2>" +
@@ -1192,6 +1226,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     else if (act === "del-music") S.music = "";
     else if (act === "del-cdphoto") S.cdPhoto = "";
     else if (act === "theme") S.theme = b.dataset.t;
+    else if (act === "map-show") { S.mapShow = b.checked; }
     else if (act === "parallax") { S.parallax = b.checked; markDirty(); return; }
     else if (act === "shimmer") { S.shimmer = b.checked; applyTextFx(); markDirty(); return; }
     else if (act === "reset-colors") { delete S.customAccent; delete S.customText; }
@@ -1200,6 +1235,14 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     else if (act === "nav-del") { var nd = navList().slice(); nd.splice(ii, 1); S.nav = nd; }
     else if (act === "nav-up" || act === "nav-down") { var nm = navList().slice(), nj = ii + (act === "nav-up" ? -1 : 1); if (nj >= 0 && nj < nm.length) { nm.splice(nj, 0, nm.splice(ii, 1)[0]); S.nav = nm; } }
     else if (act === "nav-icon") { var ni = navList().slice(); ni[ii] = Object.assign({}, ni[ii], {i: b.dataset.ic}); S.nav = ni; }
+    else if ((act === "sec-up" || act === "sec-down" || act === "sec-toggle") && b.closest(".pgbar")) {
+      var kk = b.dataset.k2;
+      if (act === "sec-toggle") { S.hidden[kk] = !b.checked; if (!S.hidden[kk]) delete S.hidden[kk]; }
+      else { var oo = sectionOrder(), a1 = oo.indexOf(kk), a2 = a1 + (act === "sec-up" ? -1 : 1); if (a2 >= 0 && a2 < oo.length) { oo.splice(a2, 0, oo.splice(a1, 1)[0]); S.order = oo; } }
+      markDirty(); render();
+      setTimeout(function(){ var el = app.querySelector('.pgbar[data-pg="' + kk + '"]'); if (el) el.scrollIntoView({block: "center", behavior: "smooth"}); }, 30);
+      return;
+    }
     else if (act === "sec-up" || act === "sec-down") { var o = sectionOrder(), i = o.indexOf(b.dataset.k2), j = i + (act === "sec-up" ? -1 : 1); if (j >= 0 && j < o.length) { o.splice(j, 0, o.splice(i, 1)[0]); S.order = o; } }
     else if (act === "add-page") {
       var nid = Date.now().toString(36); S.custom.push({id: nid, title: "ចំណងជើងទំព័រ", text: "សរសេរខ្លឹមសារនៅទីនេះ…", img: ""});
@@ -1263,7 +1306,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       if (f === "customColor" || f === "customAccent" || f === "customText") { S.theme = "custom"; applyTheme(); }
     }
   });
-  app.addEventListener("change", function(e){ var f = e.target.dataset && e.target.dataset.f; if (f === "map" || f === "videoLink" || f === "customColor" || f === "customAccent" || f === "customText" || f === "pageFx" || f === "ornament" || f === "particles") render(); });
+  app.addEventListener("change", function(e){ var f = e.target.dataset && e.target.dataset.f; if (f === "map" || f === "mapQuery" || f === "videoLink" || f === "customColor" || f === "customAccent" || f === "customText" || f === "pageFx" || f === "ornament" || f === "particles") render(); });
 
   // ---- uploads: kept on this device until "Save" commits them to GitHub ----
   function pick(target){
