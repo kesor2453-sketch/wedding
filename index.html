@@ -326,6 +326,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .order .chk input{width:18px; height:18px; accent-color:var(--gold); flex:none}
 .order .tool.x{font-size:16px; padding:2px 10px; border:1px dashed var(--edit)}
 .order .tool[disabled]{opacity:.3; cursor:default}
+.gno{display:inline-block; min-width:38px; padding:0 6px; margin-right:4px; border-radius:6px; background:rgba(217,178,95,.2); color:var(--gold-soft); font-family:var(--f-latin); font-weight:600; text-align:center}
 .sh.qr{background:linear-gradient(135deg, var(--gold), #a8802f); color:#2a1606}
 .loading{display:grid; place-items:center; height:70vh; color:var(--gold)}
 </style>
@@ -1060,7 +1061,9 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var byName = {}, added = 0; Object.keys(S.guests).forEach(function(k){ byName[S.guests[k]] = k; });
     if (!quiet) names.forEach(function(nm){
       if (byName[nm]) return;
-      var id; do { id = Math.random().toString(36).slice(2, 6); } while (S.guests[id] || !/^[a-z]/.test(id));
+      // guest numbers in order: 01, 02, 03 … (100 and up just keep counting)
+      var next = Object.keys(S.guests).reduce(function(m, k){ return /^\d+$/.test(k) ? Math.max(m, +k) : m; }, 0) + 1, id;
+      do { id = next < 100 ? ("0" + next).slice(-2) : String(next); next++; } while (S.guests[id]);
       S.guests[id] = nm; byName[nm] = id; added++;
     });
     LINKS = names.filter(function(nm){ return byName[nm]; }).map(function(nm){ return {name: nm, link: baseUrl() + "?g=" + byName[nm], text: "សូមគោរពអញ្ជើញ " + nm + " ចូលរួមពិធីអាពាហ៍ពិពាហ៍ " + S.groom + " និង " + S.bride}; });
@@ -1072,7 +1075,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     if (!LINKS.length) { box.innerHTML = quiet ? "" : '<p class="lunar">សូមចុច «បង្កើតលីងទាំងអស់»</p>'; return; }
     box.innerHTML = '<p class="lunar" style="margin:0">បានបង្កើត ' + kn(LINKS.length) + ' លីង</p>' + LINKS.map(function(l, i){
       var done = sentLog()[l.name];
-      return '<div class="link-row' + (done ? " sent" : "") + '"><b>' + kn(i + 1) + ". " + esc(l.name) + (done ? ' <small class="ok">✓ បានផ្ញើតាម ' + esc(done) + "</small>" : "") + '</b><code>' + esc(l.link) + '</code><div class="share">' +
+      var gno = l.link.split("g=")[1] || "";
+      return '<div class="link-row' + (done ? " sent" : "") + '"><b><span class="gno">#' + esc(gno) + "</span> " + esc(l.name) + (done ? ' <small class="ok">✓ បានផ្ញើតាម ' + esc(done) + "</small>" : "") + '</b><code>' + esc(l.link) + '</code><div class="share">' +
         '<button class="sh tg" data-act="share" data-via="telegram" data-i="' + i + '">Telegram</button>' +
         '<button class="sh ms" data-act="share" data-via="messenger" data-i="' + i + '">Messenger</button>' +
         '<button class="sh ig" data-act="share" data-via="instagram" data-i="' + i + '">Instagram</button>' +
