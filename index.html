@@ -28,6 +28,7 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}
   --f-display:"Moul", "Khmer OS Muol Light", serif;
   --f-body:"Battambang", "Khmer OS", system-ui, sans-serif;
   --f-latin:"Cormorant Garamond", Georgia, serif;
+  --ts:1;
   --shade:63,6,18;
   --glow:#7a1427;
   --on-gold:#3f0612;
@@ -45,7 +46,7 @@ body{
 }
 body.has-bar{padding-bottom:96px}
 h1,h2,h3,.moul{font-family:var(--f-display); font-weight:400; color:var(--gold-soft); text-wrap:balance; margin:0}
-h2{font-size:20px}
+h2{font-size:calc(20px * var(--ts))}
 button{font-family:inherit}
 
 /* shared page look */
@@ -69,9 +70,9 @@ button{font-family:inherit}
 .cart .ear{position:absolute; top:50%; left:-31px; width:24px; height:40px; transform:translateY(-50%); color:var(--gold)}
 .cart .ear.r{left:auto; right:-31px; transform:translateY(-50%) scaleX(-1)}
 .divider{display:flex; align-items:center; justify-content:center; color:var(--gold)}
-.eyebrow{font-family:var(--f-display); font-size:15px; color:var(--gold)}
+.eyebrow{font-family:var(--f-display); font-size:calc(15px * var(--ts)); color:var(--gold)}
 .names{display:flex; flex-direction:column; align-items:center; gap:2px}
-.names h1{font-size:clamp(26px, 8vw, 36px); line-height:1.7}
+.names h1{font-size:calc(clamp(26px, 8vw, 36px) * var(--ts)); line-height:1.7}
 .amp{font-family:var(--f-latin); font-style:italic; font-size:30px; color:var(--gold); line-height:1}
 .latin{font-family:var(--f-latin); font-size:20px; letter-spacing:.12em; color:var(--ink-soft); text-transform:uppercase}
 .date-big{font-family:var(--f-latin); font-size:22px; color:var(--gold-soft); letter-spacing:.2em; font-variant-numeric:tabular-nums}
@@ -87,9 +88,9 @@ button{font-family:inherit}
 .couple{display:grid; grid-template-columns:1fr 1fr; gap:16px}
 .couple>div{min-width:0; padding:12px 8px; border-top:1px solid rgba(217,178,95,.4); border-bottom:1px solid rgba(217,178,95,.4)}
 .role{font-size:14px; color:var(--gold)}
-.couple .moul{font-size:19px; line-height:1.8; display:block}
+.couple .moul{font-size:calc(19px * var(--ts)); line-height:1.8; display:block}
 .when{display:flex; flex-direction:column; gap:4px; font-size:16px}
-.when .moul{font-size:18px}
+.when .moul{font-size:calc(18px * var(--ts))}
 .lunar{font-size:14px; color:var(--ink-soft)}
 .countdown{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; max-width:340px; margin:0 auto; width:100%}
 .countdown div{border:1px solid rgba(217,178,95,.5); padding:8px 4px 4px; border-radius:3px}
@@ -169,14 +170,14 @@ body.has-bar .player{height:calc(100vh - 112px); height:calc(100dvh - 112px)}
 .start > *:not(.bgimg){position:relative; z-index:2}
 .start .corner{position:absolute; z-index:3; width:82px; height:82px}
 .st-top{padding:9% 20px 0; display:flex; flex-direction:column; align-items:center; gap:2px}
-.st-title{font-family:var(--f-display); font-size:clamp(30px, 10vw, 44px); line-height:1.55; white-space:pre-line; margin:0;
+.st-title{font-family:var(--f-display); font-size:calc(clamp(30px, 10vw, 44px) * var(--ts)); line-height:1.55; white-space:pre-line; margin:0;
   background:linear-gradient(180deg, #fff6d8 0%, #f0d79a 35%, #c9993f 62%, #f7e3a8 80%, #b88a35 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
   filter:drop-shadow(0 2px 2px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(240,215,154,.35))}
 .st-top .crest{width:180px; color:var(--gold-soft); filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
 .st-bot{width:100%; padding:0 18px 7%; display:flex; flex-direction:column; align-items:center; gap:12px}
-.st-invite{font-family:var(--f-display); font-size:clamp(20px, 6.4vw, 27px); line-height:1.6; color:var(--gold-soft); text-shadow:0 2px 4px rgba(0,0,0,.6)}
+.st-invite{font-family:var(--f-display); font-size:calc(clamp(20px, 6.4vw, 27px) * var(--ts)); line-height:1.6; color:var(--gold-soft); text-shadow:0 2px 4px rgba(0,0,0,.6)}
 .banner{position:relative; width:min(100%, 330px); margin:0 34px; padding:8px 16px; background:linear-gradient(180deg, #fffdf6, #f3e6c4); border:2px solid #d9b25f; outline:1px solid #d9b25f; outline-offset:3px; border-radius:3px; box-shadow:0 8px 24px -10px rgba(0,0,0,.7)}
-.banner b{display:block; font-family:var(--f-display); font-weight:400; font-size:clamp(16px, 5vw, 21px); line-height:1.7; color:#5c0c1c; overflow-wrap:anywhere}
+.banner b{display:block; font-family:var(--f-display); font-weight:400; font-size:calc(clamp(16px, 5vw, 21px) * var(--ts)); line-height:1.7; color:#5c0c1c; overflow-wrap:anywhere}
 .banner .ear{position:absolute; top:50%; left:-33px; width:26px; height:44px; transform:translateY(-50%); color:#e3c06d}
 .banner .ear.r{left:auto; right:-33px; transform:translateY(-50%) scaleX(-1)}
 .st-play{width:58px; height:58px; border-radius:50%; border:2px solid #d9b25f; background:#fffaf0; color:#5c0c1c; display:grid; place-items:center; cursor:pointer; padding:0; box-shadow:0 0 0 5px rgba(240,215,154,.25), 0 8px 20px -6px rgba(0,0,0,.7)}
@@ -242,7 +243,7 @@ body.has-bar .player{height:calc(100vh - 112px); height:calc(100dvh - 112px)}
 
 .guest{display:flex; flex-direction:column; gap:0; margin-top:6px; padding:10px 14px; border:1px solid rgba(217,178,95,.5); border-radius:999px; background:rgba(var(--shade),.45)}
 .guest span{font-size:13px; color:var(--ink-soft)}
-.guest b{font-family:var(--f-display); font-weight:400; font-size:17px; color:var(--gold-soft)}
+.guest b{font-family:var(--f-display); font-weight:400; font-size:calc(17px * var(--ts)); color:var(--gold-soft)}
 .wish-form{display:flex; flex-direction:column; gap:10px; text-align:left}
 .wish-form input,.wish-form textarea{font:15px var(--f-body); padding:10px 12px; border-radius:8px; border:1px solid rgba(217,178,95,.55); background:rgba(var(--shade),.5); color:var(--ivory); width:100%; resize:vertical}
 .wish-form input::placeholder,.wish-form textarea::placeholder{color:var(--ink-soft); opacity:.7}
@@ -293,6 +294,39 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .sw.on{border-color:var(--edit); background:rgba(126,200,184,.12)}
 .sw.on i::after{content:"✓"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-style:normal; font-size:18px; text-shadow:0 1px 3px #000}
 .sw input[type=color]{position:absolute; inset:-8px; width:60px; height:60px; opacity:0; cursor:pointer; border:0; padding:0}
+/* opening animation: golden doors part to reveal the invitation */
+.gate{position:absolute; inset:0; z-index:7; overflow:hidden; border-radius:4px; pointer-events:none}
+.door{position:absolute; top:0; bottom:0; width:50.5%; background:radial-gradient(ellipse at 50% 40%, var(--glow), var(--silk) 55%, var(--silk-deep)); transition:transform 1.5s cubic-bezier(.65,0,.25,1); box-shadow:inset 0 0 40px rgba(0,0,0,.35)}
+.door.l{left:0; border-right:2px solid var(--gold)}
+.door.r{right:0; border-left:2px solid var(--gold)}
+.door::before{content:""; position:absolute; inset:12px; border:1px solid rgba(217,178,95,.55)}
+.door .corner{width:58px; height:58px}
+.door .knob{position:absolute; top:74%; width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fff2c4, var(--gold) 60%, #8a6420); transform:translateY(-50%); box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.door.l .knob{right:14px}.door.r .knob{left:14px}
+.gate.open .door.l{transform:translateX(-102%)}
+.gate.open .door.r{transform:translateX(102%)}
+.seal{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; z-index:2; text-align:center; padding:0 28px; animation:sealIn 1s cubic-bezier(.2,.7,.2,1) both; transition:opacity .7s ease, transform .9s ease}
+.seal .crest{width:200px}
+.seal-n{font-family:var(--f-display); font-size:calc(clamp(22px, 7vw, 30px) * var(--ts)); line-height:1.7; color:var(--gold-soft); text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.seal-n .amp{display:block; font-size:26px}
+.gate.open .seal{opacity:0; transform:scale(1.15)}
+@keyframes sealIn{from{opacity:0; transform:scale(.85); filter:blur(4px)}}
+.gate .burst{position:absolute; inset:0; width:100%; height:100%; z-index:3}
+.ivid{position:absolute; inset:0; z-index:8; background:#000; border-radius:4px; overflow:hidden; transition:opacity .7s ease}
+.ivid video{width:100%; height:100%; object-fit:cover; border:0; max-height:none; border-radius:0}
+.ivid.out{opacity:0}
+.skip{position:absolute; right:12px; bottom:12px; z-index:2; font:14px var(--f-body); color:#fff; background:rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.5); border-radius:999px; padding:6px 14px; cursor:pointer}
+.fprev{display:block; font-size:18px; color:var(--gold-soft); line-height:1.8; margin-top:2px}
+.rangev{color:var(--gold-soft); font-variant-numeric:tabular-nums}
+.settings input[type=range]{padding:0; accent-color:var(--gold)}
+.order{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
+.order li{display:flex; align-items:center; gap:6px; padding:6px 8px; border:1px solid rgba(126,200,184,.45); border-radius:8px}
+.order li.off{opacity:.55}
+.order .chk{flex:1; display:flex; flex-direction:row; align-items:center; gap:8px; color:var(--ivory); font-size:14px; min-width:0}
+.order .chk input{width:18px; height:18px; accent-color:var(--gold); flex:none}
+.order .tool.x{font-size:16px; padding:2px 10px; border:1px dashed var(--edit)}
+.order .tool[disabled]{opacity:.3; cursor:default}
+.sh.qr{background:linear-gradient(135deg, var(--gold), #a8802f); color:#2a1606}
 .loading{display:grid; place-items:center; height:70vh; color:var(--gold)}
 </style>
 </head>
@@ -306,7 +340,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   var GUEST = "", GCODE = ""; try { var QS = new URLSearchParams(location.search); GUEST = (QS.get("to") || "").trim().slice(0, 80); GCODE = (QS.get("g") || "").trim().slice(0, 12); } catch(e){}
   var OWNER = false; // becomes true only after the GitHub token is verified to have write access
   var LOCAL = {}, PENDING = {}, INBOX = null, unsubAuth = null, unsubSnap = null;
-  function normalize(){ if (!S.sec) S.sec = 6; ["music","cdPhoto","cover","video","videoLink","qr","introPhoto"].forEach(function(k){ if (S[k] == null) S[k] = ""; }); if (!S.theme || (S.theme !== "custom" && typeof THEMES === "object" && !THEMES[S.theme])) S.theme = "silk"; if (!Array.isArray(S.photos)) S.photos = []; if (!S.guests || typeof S.guests !== "object") S.guests = {}; delete S.wishesApi; if (S.fb === undefined) S.fb = null; }
+  function normalize(){ if (!S.sec) S.sec = 6; ["music","cdPhoto","cover","video","videoLink","qr","introPhoto","introVideo","qrLogo"].forEach(function(k){ if (S[k] == null) S[k] = ""; }); if (!S.theme || (S.theme !== "custom" && typeof THEMES === "object" && !THEMES[S.theme])) S.theme = "silk"; if (!Array.isArray(S.photos)) S.photos = []; if (!S.hidden || typeof S.hidden !== "object") S.hidden = {}; if (S.qrLogo == null) S.qrLogo = ""; if (S.introVideo == null) S.introVideo = ""; if (!S.openFx) S.openFx = "gate"; if (!S.fontDisplay) S.fontDisplay = "Moul"; if (!S.fontBody) S.fontBody = "Battambang"; if (!S.titleScale) S.titleScale = 100; if (!S.textScale) S.textScale = 100; if (!S.guests || typeof S.guests !== "object") S.guests = {}; delete S.wishesApi; if (S.fb === undefined) S.fb = null; }
   normalize();
   var app = document.getElementById("app");
   var mode = "play", editing = false, dirty = false, busy = 0;
@@ -348,6 +382,25 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     }
     t = t || THEMES.silk;
     return {light: !!t.light, silk: t.silk, deep: t.deep, glow: t.glow, gold: t.gold || GOLD.gold, soft: t.soft || GOLD.soft, ivory: t.ivory || GOLD.ivory, inks: t.inks || GOLD.inks};
+  }
+  // ---- fonts and text size (owner settings) ----
+  var DISPLAY_FONTS = [["Moul","មូល"],["Moulpali","មូលបាលី"],["Bokor","បូកគោ"],["Dangrek","ដងរែក"],["Koulen","គូលេន"],["Angkor","អង្គរ"],["Taprom","តាព្រហ្ម"],["Preahvihear","ព្រះវិហារ"],["Fasthand","សរសេរដៃ"],["Kdam Thmor Pro","ក្តាមថ្ម"],["Battambang","បាត់ដំបង"]];
+  var BODY_FONTS = [["Battambang","បាត់ដំបង"],["Kantumruy Pro","កន្ទុំរុយ"],["Hanuman","ហនុមាន"],["Siemreap","សៀមរាប"],["Suwannaphum","សុវណ្ណភូមិ"],["Nokora","នគរ"],["Content","ខនថិន"],["Noto Serif Khmer","Noto Serif"],["Noto Sans Khmer","Noto Sans"]];
+  var loadedFonts = {Moul: 1, Battambang: 1};
+  function loadFont(f){
+    if (!f || loadedFonts[f]) return; loadedFonts[f] = 1;
+    var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(f).replace(/%20/g, "+") + "&display=swap"; document.head.appendChild(l);
+  }
+  function fontOk(list, f){ return list.some(function(x){ return x[0] === f; }); }
+  function textScale(){ return Math.max(.8, Math.min(1.4, (+S.textScale || 100) / 100)); }
+  function applyFonts(){
+    var d = fontOk(DISPLAY_FONTS, S.fontDisplay) ? S.fontDisplay : "Moul", b = fontOk(BODY_FONTS, S.fontBody) ? S.fontBody : "Battambang", st = document.body.style;
+    loadFont(d); loadFont(b);
+    st.setProperty("--f-display", '"' + d + '", "Moul", "Khmer OS Muol Light", serif');
+    st.setProperty("--f-body", '"' + b + '", "Battambang", "Khmer OS", system-ui, sans-serif');
+    st.setProperty("--ts", Math.max(.7, Math.min(1.5, (+S.titleScale || 100) / 100)));
+    app.querySelectorAll(".list .inner").forEach(function(el){ el.style.zoom = textScale(); });
+    app.querySelectorAll(".slide .inner").forEach(function(el){ el.style.zoom = zoom * textScale(); });
   }
   function applyTheme(){
     var t = themeOf(S.theme), st = document.body.style, shade = hexRgb(t.light ? t.silk : t.deep).join(",");
@@ -438,22 +491,38 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 
   // ---- pages: each is one "scene" of the invitation film ----
   function page(inner, opt){ opt = opt || {}; return {html:'<div class="page ' + (opt.cls||"") + '">' + (opt.pre||"") + CORNERS + '<div class="inner">' + vh(inner) + "</div></div>", dur: opt.dur || S.sec, kind: opt.kind || "text", tag: opt.tag || ""}; }
+  var SECTIONS = [["parents","មាតាបិតា និងពាក្យអញ្ជើញ"],["date","ថ្ងៃខែ និងទីតាំងពិធី"],["countdown","រាប់ថយក្រោយ"],["schedule","កម្មវិធីសិរីមង្គល"],["photos","រូបភាពអនុស្សាវរីយ៍"],["video","វីដេអូ"],["venue","ទីកន្លែង និងផែនទី"],["gift","ចំណងដៃ"],["wishes","ពាក្យជូនពរ"],["qr","QR ធៀប"],["closing","ពាក្យអរគុណ"]];
+  function sectionOrder(){
+    var known = SECTIONS.map(function(x){ return x[0]; }), o = (Array.isArray(S.order) ? S.order : []).filter(function(k, i, a){ return known.indexOf(k) >= 0 && a.indexOf(k) === i; });
+    known.forEach(function(k){ if (o.indexOf(k) < 0) o.push(k); });
+    return o;
+  }
+  function isHidden(k){ return !!(S.hidden && S.hidden[k]); }
   function pages(){
     var P = [], sec = Math.max(3, +S.sec || 6);
     // 1 cover
     var cov = S.cover ? '<div class="cover-photo"><img class="kb" src="' + src(S.cover) + '" alt="រូបភាពកូនកំលោះ និងកូនក្រមុំ"></div>' + X("del-cover","ដករូបគម្របចេញ") : "";
     P.push(page((editing && !S.cover ? '<button class="tool" data-act="pick" data-target="cover">+ ដាក់រូបគម្រប</button>' : "") + (S.cover ? "" : LOTUS) + T("div","eyebrow","eyebrow") + '<div class="cart">' + EAR + '<div class="names">' + T("h1","groom") + '<span class="amp">&amp;</span>' + T("h1","bride") + "</div>" + EAR.replace('class="ear"', 'class="ear r"') + "</div>" + T("div","latin","latin") + DIV + T("div","dateShort","date-big") + (GUEST && !editing ? '<div class="guest"><span>សូមគោរពអញ្ជើញ</span><b>' + esc(GUEST) + "</b></div>" : ""), {cls: S.cover ? "has-cover" : "", pre: cov, dur: sec, tag: "cover"}));
+    var B = {};
+    var cdBg = S.cdPhoto || S.photos[0] || S.cover;
+    var CD = '<div><div class="countdown" data-cd><div><b>--</b><small>ថ្ងៃ</small></div><div><b>--</b><small>ម៉ោង</small></div><div><b>--</b><small>នាទី</small></div><div><b>--</b><small>វិនាទី</small></div></div><p class="lunar" data-cd-done hidden>សូមអរគុណដែលបានចូលរួមក្នុងថ្ងៃដ៏មានន័យនេះ</p></div>';
+    var cdInline = !cdBg && !isHidden("countdown");
+    B.parents = function(){
     // 2 parents + invitation
     P.push(page(DIV + '<div class="parents">' + ["g","b"].map(function(side){
       return '<div><span class="side">' + (side === "g" ? "ខាងកូនប្រុស" : "ខាងកូនស្រី") + "</span>" + S.parents[side].map(function(_, i){ return T("p","parents." + side + "." + i); }).join("") + "</div>";
     }).join("") + "</div>" + T("div","invite","invite-text") + DIV, {dur: sec + 3}));
+    };
+    B.date = function(){
     // 3 couple + date; the countdown gets its own photo scene when a photo exists
-    var cdBg = S.cdPhoto || S.photos[0] || S.cover;
-    var CD = '<div><div class="countdown" data-cd><div><b>--</b><small>ថ្ងៃ</small></div><div><b>--</b><small>ម៉ោង</small></div><div><b>--</b><small>នាទី</small></div><div><b>--</b><small>វិនាទី</small></div></div><p class="lunar" data-cd-done hidden>សូមអរគុណដែលបានចូលរួមក្នុងថ្ងៃដ៏មានន័យនេះ</p></div>';
     P.push(page('<div class="couple"><div><div class="role">កូនប្រុសនាម</div>' + T("span","groom","moul") + '</div><div><div class="role">កូនស្រីនាម</div>' + T("span","bride","moul") + "</div></div>" +
-      '<div class="when"><span>ដែលនឹងប្រព្រឹត្តទៅនៅ</span>' + T("span","dateKh","moul") + T("span","lunar","lunar") + T("span","timeKh") + "</div>" + (cdBg ? "" : CD), {dur: sec + 2, tag: "date"}));
+      '<div class="when"><span>ដែលនឹងប្រព្រឹត្តទៅនៅ</span>' + T("span","dateKh","moul") + T("span","lunar","lunar") + T("span","timeKh") + "</div>" + (cdInline ? CD : ""), {dur: sec + 2, tag: "date"}));
+    };
+    B.countdown = function(){
     if (cdBg) P.push(page('<div class="eyebrow">ចំនួនថ្ងៃរាប់ថយក្រោយ</div><div class="script">Wedding Day</div>' + CD + T("div","dateShort","date-big"),
       {cls: "has-cover", pre: '<div class="cover-photo"><img class="kb" src="' + src(cdBg) + '" alt=""></div>' + (S.cdPhoto ? X("del-cdphoto","ដករូបចេញ") : ""), dur: sec}));
+    };
+    B.schedule = function(){
     // 4 programme, one scene per session: a timeline for guests, an editable list for the owner
     S.schedule.forEach(function(sess, si){
       var body;
@@ -467,6 +536,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       }
       P.push(page("<h2>កម្មវិធីសិរីមង្គល</h2>" + body, {dur: sec + 2 + sess.items.length, tag: si === 0 ? "schedule" : ""}));
     });
+    };
+    B.photos = function(){
     // 5 photos: a collage, then one scene per photo in the film; a gallery in the list view
     if (mode === "play") {
       if (S.photos.length >= 2) P.push(page('<div class="script">Photo Gallery</div><h2>រូបភាពអនុស្សាវរីយ៍</h2><div class="collage">' + S.photos.slice(0, 3).map(function(id){ return '<img src="' + src(id) + '" alt="">'; }).join("") + "</div>", {dur: sec, tag: "photos"}));
@@ -478,6 +549,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         return '<figure><img src="' + src(id) + '" alt="រូបភាព ' + (i+1) + '" data-zoom loading="lazy">' + X("del-photo","ដករូបចេញ",' data-i="' + i + '"') + "</figure>";
       }).join("") + "</div>" + (editing ? '<button class="tool" data-act="pick" data-target="photos">+ បន្ថែមរូបភាព (ជ្រើសបានច្រើន)</button>' : ""), {tag: "photos"}));
     }
+    };
+    B.video = function(){
     // 6 video
     var vlink = safeUrl(S.videoLink);
     if (S.video || vlink || editing) {
@@ -487,30 +560,43 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       if (vlink) v += '<div class="actions"><a class="btn" href="' + esc(vlink) + '" target="_blank" rel="noopener">' + I.play + " មើលវីដេអូពេញ</a></div>";
       P.push(page(v, {kind: S.video ? "video" : "text", dur: sec}));
     }
+    };
+    B.venue = function(){
     // 7 venue
     var map = safeUrl(S.map), c = calUrl();
     P.push(page(LOTUS + "<h2>ទីកន្លែង</h2>" + '<div class="venue">' + T("p","venueName","moul") + T("p","venueAddr") + "</div>" + '<div class="actions">' +
       (map ? '<a class="btn solid" href="' + esc(map) + '" target="_blank" rel="noopener">' + I.pin + " មើលផែនទី</a>" : "") +
       (c ? '<a class="btn" href="' + esc(c) + '" target="_blank" rel="noopener">' + I.cal + " ដាក់ក្នុងប្រតិទិន</a>" : "") + "</div>", {dur: sec + 1, tag: "venue"}));
+    };
+    B.gift = function(){
     // 8 gift
     if (S.qr || editing) {
       P.push(page("<h2>ចំណងដៃ</h2>" + '<div class="gift">' + T("p","giftText") + "</div>" +
         (S.qr ? '<div style="position:relative"><img class="qr" src="' + src(S.qr) + '" alt="QR សម្រាប់ផ្ញើចំណងដៃ">' + X("del-qr","ដក QR ចេញ") + "</div>" : '<button class="tool" data-act="pick" data-target="qr">+ ដាក់រូប QR (ABA, ACLEDA…)</button>'), {dur: sec + 2, tag: "gift"}));
     }
+    };
+    B.wishes = function(){
     // wishes from guests: sent privately to the couple (only the owner can read them)
     if (fbOk() || editing) {
       P.push(page('<div class="script">Wishes</div><h2>ពាក្យជូនពរ</h2>' + (fbOk() ?
         '<form class="wish-form" data-wish novalidate><label class="sr" for="w-name">ឈ្មោះ</label><input id="w-name" name="name" maxlength="60" placeholder="ឈ្មោះរបស់អ្នក" value="' + esc(GUEST) + '"><label class="sr" for="w-msg">ពាក្យជូនពរ</label><textarea id="w-msg" name="msg" maxlength="500" rows="4" placeholder="សរសេរពាក្យជូនពរដល់កូនកំលោះ កូនក្រមុំ…"></textarea><input class="hp" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn solid" type="submit">' + I.send + ' ផ្ញើពាក្យជូនពរ</button><p class="lunar" data-wish-msg role="status">ពាក្យជូនពររបស់អ្នកនឹងផ្ញើទៅកូនកំលោះ កូនក្រមុំផ្ទាល់</p></form>'
         : '<p class="lunar">ដាក់ Firebase config ក្នុងការកំណត់ខាងក្រោម ដើម្បីបើកមុខងារនេះ (មើល README)</p>'), {dur: sec + 4, tag: "wishes"}));
     }
+    };
+    B.qr = function(){
     // QR of the invitation with the couple's photo, so guests can scan or pass it on
     P.push(page('<div class="script">Scan Me</div><h2>ស្កេនដើម្បីបើកធៀប</h2>' +
       '<div class="qrbox"><canvas data-qr width="640" height="640" role="img" aria-label="QR code នៃធៀបការ"></canvas></div>' +
       '<div class="names small">' + T("span","groom","moul") + '<span class="amp">&amp;</span>' + T("span","bride","moul") + "</div>" +
       '<div class="actions"><button class="btn solid" data-act="qr-save">' + I.img + ' រក្សាទុក QR</button><button class="btn" data-act="qr-copy">' + I.copy + " ចម្លងលីង</button></div>" +
-      (editing ? '<p class="lunar" style="margin:0">រូបកណ្តាល QR យករូបគម្រប (ឬរូបទីមួយក្នុងអាល់ប៊ុម)</p>' : ""), {dur: sec + 2, tag: "qr"}));
+      (GUEST && !editing ? '<div class="guest"><span>សូមគោរពអញ្ជើញ</span><b>' + esc(GUEST) + "</b></div>" : "") +
+      (editing ? '<div class="row">រូបកណ្តាល QR៖ ' + (S.qrLogo ? '<span>រូបផ្ទាល់ខ្លួន</span><button class="tool" data-act="del-qrlogo">ដកចេញ</button><button class="tool" data-act="pick" data-target="qrLogo">ប្តូររូប</button>' : '<span class="lunar">ប្រើរូបគម្រប</span><button class="tool" data-act="pick" data-target="qrLogo">+ ដាក់រូបណាក៏បាន</button>') + "</div>" : ""), {dur: sec + 2, tag: "qr"}));
+    };
+    B.closing = function(){
     // 9 closing
     P.push(page(LOTUS + '<div class="closing">' + T("p","closing1") + "</div>" + '<div class="closing">' + T("p","closing2") + "</div>" + T("span","thanks","moul") + T("div","latin","latin") + '<div class="flipv">' + CREST.replace("lotus crest", "crest") + "</div>", {dur: sec + 2}));
+    };
+    sectionOrder().forEach(function(k){ if (B[k] && !isHidden(k)) B[k](); });
     // owner settings (edit view only)
     if (editing) {
       P.push(page("<h2>ការកំណត់ (មើលឃើញតែអ្នក)</h2>" +
@@ -523,6 +609,12 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<label for="in-ititle">ចំណងជើងទំព័របើក (ចុះបន្ទាត់បាន)<textarea id="in-ititle" rows="2" data-f="introTitle">' + esc(S.introTitle || "សិរីសួស្តី\nអាពាហ៍ពិពាហ៍") + "</textarea></label>" +
         '<label for="in-gdef">ឈ្មោះលើស្លាក (ពេលបើកលីងគ្មានឈ្មោះ)<input id="in-gdef" data-f="guestDefault" value="' + esc(S.guestDefault || "ភ្ញៀវកិត្តិយស") + '"></label>' +
         '<div class="row">រូបទំព័របើក (បញ្ឈរ)៖ ' + (S.introPhoto ? '<span>មានហើយ</span><button class="tool" data-act="del-intro">ដកចេញ</button>' : '<button class="tool" data-act="pick" data-target="introPhoto">+ ដាក់រូប</button><span class="lunar">(បើមិនដាក់ ប្រើរូបគម្រប)</span>') + "</div>" +
+        '<label for="in-ofx">ចលនាពេលចុចបើកធៀប<select id="in-ofx" data-f="openFx"><option value="gate"' + (S.openFx !== "none" ? " selected" : "") + '>ទ្វារមាសបើក + ពន្លឺផ្កាភ្លើង</option><option value="none"' + (S.openFx === "none" ? " selected" : "") + ">គ្មាន (ចូលភ្លាម)</option></select></label>" +
+        '<div class="row">វីដេអូនាំចូលធៀប (បើដាក់ វាចាក់ជំនួសទ្វារ)៖ ' + (S.introVideo ? '<span>មានហើយ</span><button class="tool" data-act="del-introvideo">ដកចេញ</button>' : '<button class="tool" data-act="pick" data-target="introVideo">+ ដាក់វីដេអូ (បញ្ឈរ, ≤២៥MB)</button>') + "</div>" +
+        '<label for="in-fd">ពុម្ពអក្សរចំណងជើង<select id="in-fd" data-f="fontDisplay">' + DISPLAY_FONTS.map(function(f){ return '<option value="' + f[0] + '"' + (S.fontDisplay === f[0] ? " selected" : "") + ">" + f[1] + " (" + f[0] + ")</option>"; }).join("") + '</select><span class="fprev" style="font-family:var(--f-display)">' + esc(S.groom) + " &amp; " + esc(S.bride) + "</span></label>" +
+        '<label for="in-fb2">ពុម្ពអក្សរអត្ថបទ<select id="in-fb2" data-f="fontBody">' + BODY_FONTS.map(function(f){ return '<option value="' + f[0] + '"' + (S.fontBody === f[0] ? " selected" : "") + ">" + f[1] + " (" + f[0] + ")</option>"; }).join("") + '</select><span class="fprev" style="font-family:var(--f-body); font-size:15px">មានកិត្តិយសសូមគោរពអញ្ជើញ ចូលរួមពិធីអាពាហ៍ពិពាហ៍</span></label>' +
+        '<label for="in-ts">ទំហំចំណងជើង៖ <span class="rangev" id="v-ts">' + kn(S.titleScale) + '%</span><input id="in-ts" type="range" min="70" max="150" step="5" data-f="titleScale" value="' + esc(S.titleScale) + '"></label>' +
+        '<label for="in-xs">ទំហំអក្សរទាំងមូល៖ <span class="rangev" id="v-xs">' + kn(S.textScale) + '%</span><input id="in-xs" type="range" min="80" max="140" step="5" data-f="textScale" value="' + esc(S.textScale) + '"></label>' +
         '<label for="in-sec">រយៈពេលបង្ហាញមួយទំព័រ (វិនាទី)<input id="in-sec" type="number" min="3" max="20" data-f="sec" value="' + esc(S.sec) + '"></label>' +
         '<label for="in-map">លីង Google Maps (https://…)<input id="in-map" type="url" data-f="map" value="' + esc(S.map) + '" placeholder="https://maps.app.goo.gl/…"></label>' +
         '<label for="in-fb">Firebase config សម្រាប់ពាក្យជូនពរ (បិទភ្ជាប់ firebaseConfig ទាំងមូល)<textarea id="in-fb" rows="4" data-fb placeholder="const firebaseConfig = { apiKey: ..., projectId: ... }">' + esc(S.fb ? JSON.stringify(S.fb) : "") + '</textarea></label><p class="lunar" id="fb-st" style="margin:0">' + (fbOk() ? "✓ បានភ្ជាប់ " + esc(S.fb.projectId) : "មិនទាន់ភ្ជាប់") + "</p>" +
@@ -530,6 +622,10 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<div class="row">តន្ត្រីផ្ទៃខាងក្រោយ៖ ' + (S.music ? '<span>មានហើយ</span><button class="tool" data-act="del-music">ដកចេញ</button>' : '<button class="tool" data-act="pick" data-target="music">+ ដាក់បទចម្រៀង (MP3)</button>') + "</div>" +
         '<p class="lunar" style="margin:0">ប៉ះលើអក្សរណាមួយដែលមានបន្ទាត់ចុចៗ ដើម្បីកែ។ ពេលកែរួច ចុច «រក្សាទុក» ទើបភ្ញៀវឃើញ។</p>', {cls:"settings"}));
       var G = gh();
+      P.push(page("<h2>លំដាប់ទំព័រ</h2>" + '<p class="lunar" style="margin:0">ចុច ↑ ↓ ដើម្បីប្តូរលំដាប់ ហើយដោះធីក ដើម្បីលាក់ទំព័រណាដែលមិនចង់បង្ហាញ។ ទំព័រគម្របនៅដំបូងជានិច្ច។</p>' +
+        '<ol class="order">' + sectionOrder().map(function(k, i, a){ var lbl = SECTIONS.filter(function(x){ return x[0] === k; })[0][1];
+          return '<li class="' + (isHidden(k) ? "off" : "") + '"><label class="chk"><input type="checkbox" data-act="sec-toggle" data-k2="' + k + '"' + (isHidden(k) ? "" : " checked") + '><span>' + kn(i + 1) + ". " + lbl + "</span></label>" +
+            '<button class="tool x" data-act="sec-up" data-k2="' + k + '"' + (i === 0 ? " disabled" : "") + ' aria-label="ឡើងលើ">↑</button><button class="tool x" data-act="sec-down" data-k2="' + k + '"' + (i === a.length - 1 ? " disabled" : "") + ' aria-label="ចុះក្រោម">↓</button></li>'; }).join("") + "</ol>", {cls:"settings"}));
       P.push(page("<h2>ភ្ជាប់ GitHub (រក្សាទុកលើឧបករណ៍នេះតែប៉ុណ្ណោះ)</h2>" +
         '<label for="gh-repo">Repo (ឧ. benlinda/wedding)<input id="gh-repo" data-gh="repo" value="' + esc(G.repo || guessRepo()) + '" placeholder="username/repo"></label>' +
         '<label for="gh-branch">Branch<input id="gh-branch" data-gh="branch" value="' + esc(G.branch || "main") + '"></label>' +
@@ -550,7 +646,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 
   function render(){
     clearTimeout(cdTimer);
-    applyTheme();
+    applyTheme(); applyFonts();
     if (mode === "inbox") {
       app.className = "list";
       app.innerHTML = '<div class="backbar"><button class="btn" data-ui="toplay">← ត្រលប់ទៅធៀប</button></div>' +
@@ -561,6 +657,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     if (cur >= P.length) cur = P.length - 1;
     if (mode === "list") {
       app.className = "list" + (editing ? " editing" : "");
+      setTimeout(applyFonts, 0);
       app.innerHTML = (editing ? "" : '<div class="backbar"><button class="btn solid" data-ui="toplay">' + I.play + " ចាក់ជាវីដេអូ</button></div>") + P.map(function(p){ return p.html; }).join("");
       if (editing) app.querySelectorAll("[data-k]").forEach(function(el){
         try { el.contentEditable = "plaintext-only"; } catch(e){}
@@ -658,7 +755,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   requestAnimationFrame(frame);
 
   function applyZoom(){
-    app.querySelectorAll(".slide .inner").forEach(function(el){ el.style.zoom = zoom; });
+    app.querySelectorAll(".slide .inner").forEach(function(el){ el.style.zoom = zoom * textScale(); });
     app.querySelectorAll(".slide .frame").forEach(function(el){ el.style.transform = "scale(" + zoom + ")"; });
     var zl = document.getElementById("zl"); if (zl) zl.textContent = kn(Math.round(zoom * 100)) + "%";
     var a = app.querySelector('[data-ui="zout"]'), b = app.querySelector('[data-ui="zin"]');
@@ -686,7 +783,48 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     started = true; app.classList.add("go");
     var st = app.querySelector(".start"); if (st) { st.classList.add("out"); setTimeout(function(){ st.remove(); }, 800); }
     if (S.music && !audio) { audio = new Audio(src(S.music)); audio.loop = true; }
-    show(0); setPlaying(true);
+    show(0);
+    var go = function(){ setPlaying(true); };
+    var reduce = false; try { reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
+    if (S.introVideo) introVideo(go);
+    else if (S.openFx !== "none" && !reduce) { if (audio && !muted) audio.play().catch(function(){}); gate(go); }
+    else go();
+  }
+  // the owner's own opening video, played full screen once, with a skip button
+  function introVideo(done){
+    var box = document.createElement("div"); box.className = "ivid";
+    box.innerHTML = '<video playsinline autoplay preload="auto" src="' + src(S.introVideo) + '"></video><button class="skip" type="button">រំលង ›</button>';
+    var slides = document.getElementById("slides"); if (!slides) return done(); slides.appendChild(box);
+    var v = box.querySelector("video"), fin = false;
+    var end = function(){ if (fin) return; fin = true; box.classList.add("out"); setTimeout(function(){ box.remove(); }, 700); done(); };
+    v.addEventListener("ended", end); v.addEventListener("error", end);
+    box.querySelector(".skip").addEventListener("click", function(e){ e.stopPropagation(); v.pause(); end(); });
+    box.addEventListener("pointerdown", function(e){ e.stopPropagation(); });
+    box.addEventListener("pointerup", function(e){ e.stopPropagation(); });
+    var p = v.play(); if (p && p.catch) p.catch(function(){ v.muted = true; v.play().catch(end); });
+  }
+  // built-in opening: golden doors with the couple's names part to reveal the first page
+  function gate(done){
+    var slides = document.getElementById("slides"); if (!slides) return done();
+    var g = document.createElement("div"); g.className = "gate";
+    g.innerHTML = '<div class="door l">' + CORNERS + '<i class="knob"></i></div><div class="door r">' + CORNERS + '<i class="knob"></i></div>' +
+      '<div class="seal">' + CREST.replace("lotus crest", "crest") + '<div class="seal-n">' + esc(S.groom) + '<span class="amp">&amp;</span>' + esc(S.bride) + "</div>" + RULE + "</div>" +
+      '<canvas class="burst" aria-hidden="true"></canvas>';
+    slides.appendChild(g);
+    setTimeout(function(){ g.classList.add("open"); burst(g.querySelector(".burst")); }, 1500);
+    setTimeout(function(){ g.remove(); done(); }, 3100);
+  }
+  function burst(cv){
+    if (!cv) return; var r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); if (!r.width) return;
+    cv.width = r.width * d; cv.height = r.height * d; var ctx = cv.getContext("2d"); if (!ctx) return; ctx.scale(d, d);
+    var ps = [], t0 = 0;
+    for (var i = 0; i < 70; i++) { var a = Math.random() * 6.283, sp = 60 + Math.random() * 220; ps.push({x: r.width / 2, y: r.height / 2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 40, s: Math.random() * 2.4 + .8}); }
+    (function tick(ts){
+      if (!t0) t0 = ts; var t = (ts - t0) / 1000; if (t > 1.6 || !cv.isConnected) return;
+      ctx.clearRect(0, 0, r.width, r.height); ctx.shadowColor = "rgba(240,215,154,.9)"; ctx.shadowBlur = 10;
+      ps.forEach(function(p){ var x = p.x + p.vx * t, y = p.y + p.vy * t + 90 * t * t; ctx.globalAlpha = Math.max(0, 1 - t / 1.6); ctx.fillStyle = "#f7e3a8"; ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill(); });
+      requestAnimationFrame(tick);
+    })(performance.now());
   }
 
   // countdown
@@ -786,7 +924,11 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     else if (act === "del-music") S.music = "";
     else if (act === "del-cdphoto") S.cdPhoto = "";
     else if (act === "theme") S.theme = b.dataset.t;
+    else if (act === "sec-up" || act === "sec-down") { var o = sectionOrder(), i = o.indexOf(b.dataset.k2), j = i + (act === "sec-up" ? -1 : 1); if (j >= 0 && j < o.length) { o.splice(j, 0, o.splice(i, 1)[0]); S.order = o; } }
+    else if (act === "sec-toggle") { S.hidden[b.dataset.k2] = !b.checked; if (!S.hidden[b.dataset.k2]) delete S.hidden[b.dataset.k2]; }
+    else if (act === "del-qrlogo") S.qrLogo = "";
     else if (act === "del-intro") S.introPhoto = "";
+    else if (act === "del-introvideo") S.introVideo = "";
     else if (act === "pick") { pick(b.dataset.target); return; }
     else if (act === "download") { downloadJson(); return; }
     else if (act === "make-links") { makeLinks(); return; }
@@ -823,7 +965,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     } else if (el.dataset && el.dataset.gh) {
       var g = gh(); g[el.dataset.gh] = el.value.trim(); try { localStorage.setItem("gh", JSON.stringify(g)); } catch(err){}
     } else if (el.dataset && el.dataset.f) {
-      var f = el.dataset.f; S[f] = f === "sec" ? Math.max(3, Math.min(20, +el.value || 6)) : el.value.trim(); markDirty();
+      var f = el.dataset.f; S[f] = f === "sec" ? Math.max(3, Math.min(20, +el.value || 6)) : (f === "titleScale" || f === "textScale") ? +el.value : el.value.trim(); markDirty();
+      if (f === "fontDisplay" || f === "fontBody" || f === "titleScale" || f === "textScale") { applyFonts(); var lb = document.getElementById(f === "titleScale" ? "v-ts" : "v-xs"); if (lb && /Scale/.test(f)) lb.textContent = kn(S[f]) + "%"; }
       if (f === "start") countdown();
       if (f === "customColor") { S.theme = "custom"; applyTheme(); }
     }
@@ -833,7 +976,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   // ---- uploads: kept on this device until "Save" commits them to GitHub ----
   function pick(target){
     var inp = document.createElement("input"); inp.type = "file";
-    inp.accept = target === "video" ? "video/*" : target === "music" ? "audio/*" : "image/*";
+    inp.accept = (target === "video" || target === "introVideo") ? "video/*" : target === "music" ? "audio/*" : "image/*";
     inp.multiple = target === "photos";
     inp.onchange = function(){ Array.prototype.forEach.call(inp.files, function(f){ prepare(f, target); }); };
     inp.click();
@@ -853,9 +996,9 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   function prepare(file, target){
     var isImg = /^image\/(jpeg|png|webp|heic|heif)/i.test(file.type) || (/^image\//.test(file.type) && !/gif|svg/.test(file.type));
     busy++; updateBar();
-    (isImg ? shrink(file, target === "qr") : Promise.resolve(file)).then(function(blob){
+    (isImg ? shrink(file, target === "qr" || target === "qrLogo") : Promise.resolve(file)).then(function(blob){
       if (blob.size > 25 * 1024 * 1024) throw {code: "big"};
-      var ext = isImg ? (target === "qr" ? "png" : "jpg") : ((file.name.split(".").pop() || "bin").toLowerCase().replace(/[^a-z0-9]/g, "") || "bin");
+      var ext = isImg ? ((target === "qr" || target === "qrLogo") ? "png" : "jpg") : ((file.name.split(".").pop() || "bin").toLowerCase().replace(/[^a-z0-9]/g, "") || "bin");
       var path = "photos/" + target.toLowerCase() + "-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6) + "." + ext;
       PENDING[path] = blob; LOCAL[path] = URL.createObjectURL(blob);
       if (target === "photos") S.photos.push(path); else S[target] = path;
@@ -891,7 +1034,12 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       .then(function(){ dirty = false; updateBar(); toast("បានរក្សាទុក! ភ្ញៀវនឹងឃើញកំណែថ្មីក្នុងរយៈ ១–២ នាទី"); })
       .catch(function(e){
         var st = e && e.status;
-        toast(st === 401 ? "Token មិនត្រឹមត្រូវ ឬផុតកំណត់" : (st === 403 || st === 404) ? "រក Repo មិនឃើញ ឬ Token គ្មានសិទ្ធិសរសេរ" : st === 409 ? "មានការកែពីកន្លែងផ្សេង សូមចុចរក្សាទុកម្តងទៀត" : "រក្សាទុកមិនបាន៖ " + ((e && e.message) || "សូមពិនិត្យអ៊ីនធឺណិត"));
+        var why = st === 401 ? "Token មិនត្រឹមត្រូវ ឬផុតកំណត់ — សូមចាកចេញ ហើយចូលម្តងទៀតជាមួយ token ថ្មី"
+          : st === 403 ? "Token គ្មានសិទ្ធិសរសេរ — នៅ GitHub សូមកែ token៖ Permissions → Contents → Read and write"
+          : st === 404 ? "Token មើលមិនឃើញ repo នេះ — នៅ GitHub សូមកែ token៖ Repository access → ជ្រើស " + cfg.repo
+          : st === 409 || st === 422 ? "មានការកែពីកន្លែងផ្សេង សូមចុចរក្សាទុកម្តងទៀត"
+          : "រក្សាទុកមិនបាន៖ " + ((e && e.message) || "សូមពិនិត្យអ៊ីនធឺណិត");
+        toast(why); var tt = document.getElementById("toast"); if (tt) { clearTimeout(toastT); toastT = setTimeout(function(){ tt.hidden = true; }, 9000); }
         updateBar();
       });
   }
@@ -928,6 +1076,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<button class="sh tg" data-act="share" data-via="telegram" data-i="' + i + '">Telegram</button>' +
         '<button class="sh ms" data-act="share" data-via="messenger" data-i="' + i + '">Messenger</button>' +
         '<button class="sh ig" data-act="share" data-via="instagram" data-i="' + i + '">Instagram</button>' +
+        '<button class="sh qr" data-act="share" data-via="qr" data-i="' + i + '">' + I.img + " QR មានឈ្មោះ</button>" +
         '<button class="sh cp" data-act="share" data-via="copy" data-i="' + i + '">' + I.copy + " ចម្លង</button>" +
         '<button class="sh cp" data-act="share" data-via="rich" data-i="' + i + '" title="បិទភ្ជាប់ក្នុង Telegram លើកុំព្យូទ័រ៖ ឃើញតែអក្សរ ចុចបាន">ចម្លងអក្សរមានលីងលាក់</button>' +
         (navigator.share ? '<button class="sh cp" data-act="share" data-via="more" data-i="' + i + '">ផ្សេងៗ…</button>' : "") +
@@ -958,6 +1107,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     if (VIA[via] && !b.dataset.ok) { askConfirm(l, via, function(){ b.dataset.ok = "1"; sendVia(via, i, b); delete b.dataset.ok; }); return; }
     if (via === "copy") copyText(msg, b);
     else if (via === "rich") copyRich(l, b);
+    else if (via === "qr") saveQrCard(b, {link: l.link, name: l.name, text: l.text});
     else if (via === "telegram") window.open("https://t.me/share/url?url=" + encodeURIComponent(l.link) + "&text=" + encodeURIComponent(l.text), "_blank", "noopener");
     else if (via === "more") navigator.share({title: document.title, text: l.text, url: l.link}).catch(function(){});
     else if (via === "messenger") {
@@ -997,7 +1147,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   // ---- QR code ----
   var QRLIB = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
   function qrLib(){ return window.qrcode ? Promise.resolve(window.qrcode) : loadScript(QRLIB).catch(function(){ return loadScript("https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"); }).then(function(){ return window.qrcode; }); }
-  function couplePhoto(){ return S.cover || S.photos[0] || S.cdPhoto || ""; }
+  function couplePhoto(){ return S.qrLogo || S.cover || S.photos[0] || S.cdPhoto || ""; }
   function svgImg(svg, color){
     return new Promise(function(res){
       var str = svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ').replace(/currentColor/g, color).replace(/class="[^"]*"/, "");
@@ -1012,8 +1162,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   }
   function rrect(ctx, x, y, w, h, r){ ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
   // draw the QR (with the couple's photo in a round centre) into ctx at x,y size
-  function paintQR(ctx, Q, im, x, y, size){
-    var qr = Q(0, "H"); qr.addData(baseUrl()); qr.make();
+  function paintQR(ctx, Q, im, x, y, size, link){
+    var qr = Q(0, "H"); qr.addData(link || baseUrl()); qr.make();
     var n = qr.getModuleCount(), quiet = 2, cell = size / (n + quiet * 2), ink = themeOf(S.theme).light ? themeOf(S.theme).ivory : themeOf(S.theme).deep;
     ctx.save();
     ctx.fillStyle = "#fffaf0"; rrect(ctx, x, y, size, size, size * .05); ctx.fill();
@@ -1039,7 +1189,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     }).catch(function(){ cs.forEach(function(cv){ var p = document.createElement("p"); p.className = "lunar"; p.textContent = baseUrl(); cv.replaceWith(p); }); });
   }
   // a shareable card: photo on top, names, date, QR
-  function saveQrCard(b){
+  function saveQrCard(b, g){
+    g = g || {};
     var o = b.innerHTML; b.disabled = true; b.textContent = "កំពុងរៀបចំ…";
     var gold = getComputedStyle(document.body).getPropertyValue("--gold").trim() || "#d9b25f";
     Promise.all([qrLib(), loadImg(couplePhoto()), document.fonts ? document.fonts.ready : null, svgImg(CORNERS.split("</svg>")[0] + "</svg>", gold), svgImg(RULE, gold)]).then(function(r){
@@ -1052,26 +1203,37 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       var ornC = r[3]; if (ornC) { [[0,0,1,1],[W,0,-1,1],[0,H,1,-1],[W,H,-1,-1]].forEach(function(q){ ctx.save(); ctx.translate(q[0], q[1]); ctx.scale(q[2], q[3]); ctx.drawImage(ornC, 14, 14, 150, 150); ctx.restore(); }); }
       var top = 60;
       if (r[1]) {
-        ctx.save(); var aw = 640, ah = 560, ax = (W - aw) / 2;
+        ctx.save(); var aw = g.name ? 560 : 640, ah = g.name ? 450 : 560, ax = (W - aw) / 2;
         ctx.beginPath(); ctx.moveTo(ax, top + ah); ctx.lineTo(ax, top + aw / 2); ctx.arc(W / 2, top + aw / 2, aw / 2, Math.PI, 0); ctx.lineTo(ax + aw, top + ah); ctx.closePath();
         ctx.clip(); coverFit(ctx, r[1], ax, top, aw, ah); ctx.restore();
         ctx.beginPath(); ctx.moveTo(ax, top + ah); ctx.lineTo(ax, top + aw / 2); ctx.arc(W / 2, top + aw / 2, aw / 2, Math.PI, 0); ctx.lineTo(ax + aw, top + ah); ctx.stroke();
         top += ah + 40;
       } else top += 80;
       ctx.textAlign = "center"; ctx.fillStyle = v("--gold") || "#d9b25f";
-      ctx.font = "34px Moul, serif"; ctx.fillText(S.eyebrow, W / 2, top + 30);
-      ctx.fillStyle = v("--gold-soft") || "#f0d79a"; ctx.font = "54px Moul, serif";
+      ctx.font = "34px \"" + (S.fontDisplay || "Moul") + "\", Moul, serif"; ctx.fillText(S.eyebrow, W / 2, top + 30);
+      ctx.fillStyle = v("--gold-soft") || "#f0d79a"; ctx.font = "54px \"" + (S.fontDisplay || "Moul") + "\", Moul, serif";
       ctx.fillText(S.groom + "  &  " + S.bride, W / 2, top + 120, W - 120);
       if (r[4]) ctx.drawImage(r[4], W / 2 - 260, top + 140, 520, 43);
       ctx.font = "italic 40px 'Cormorant Garamond', serif"; ctx.fillText(S.dateShort, W / 2, top + 230);
-      var qs = r[1] ? 400 : 600, qy = H - qs - 130;
-      paintQR(ctx, r[0], r[1], (W - qs) / 2, qy, qs);
-      ctx.fillStyle = v("--ink-soft") || "#e9d3bf"; ctx.font = "30px Battambang, sans-serif"; ctx.fillText("ស្កេនដើម្បីបើកធៀប", W / 2, H - 70);
+      var qs = g.name ? (r[1] ? 340 : 520) : (r[1] ? 400 : 600), qy = g.name ? H - qs - 300 : H - qs - 130;
+      paintQR(ctx, r[0], r[1], (W - qs) / 2, qy, qs, g.link);
+      if (g.name) {
+        // the guest's name on a cream banner under the QR
+        ctx.fillStyle = v("--gold-soft") || "#f0d79a"; ctx.font = "32px \"" + (S.fontDisplay || "Moul") + "\", Moul, serif"; ctx.fillText("សូមគោរពអញ្ជើញ", W / 2, qy + qs + 62);
+        var bw = 760, bh = 92, bx = (W - bw) / 2, by = qy + qs + 88;
+        ctx.fillStyle = "#fbf3dc"; rrect(ctx, bx, by, bw, bh, 8); ctx.fill();
+        ctx.strokeStyle = v("--gold") || "#d9b25f"; ctx.lineWidth = 3; rrect(ctx, bx, by, bw, bh, 8); ctx.stroke();
+        ctx.lineWidth = 1.2; rrect(ctx, bx - 8, by - 8, bw + 16, bh + 16, 12); ctx.stroke();
+        ctx.fillStyle = "#5c0c1c"; ctx.font = "38px \"" + (S.fontDisplay || "Moul") + "\", Moul, serif"; ctx.fillText(g.name, W / 2, by + 60, bw - 40);
+        ctx.fillStyle = v("--ink-soft") || "#e9d3bf"; ctx.font = "26px \"" + (S.fontBody || "Battambang") + "\", Battambang, sans-serif"; ctx.fillText("ស្កេនដើម្បីបើកធៀប", W / 2, H - 58);
+      } else {
+        ctx.fillStyle = v("--ink-soft") || "#e9d3bf"; ctx.font = "30px \"" + (S.fontBody || "Battambang") + "\", Battambang, sans-serif"; ctx.fillText("ស្កេនដើម្បីបើកធៀប", W / 2, H - 70);
+      }
       return new Promise(function(res){ cv.toBlob(res, "image/png"); });
     }).then(function(blob){
-      var name = "QR-" + (S.latin || "wedding").replace(/[^\w&-]+/g, "-") + ".png", file = null;
+      var code = g.link && (g.link.split("g=")[1] || ""), name = "QR-" + (S.latin || "wedding").replace(/[^\w&-]+/g, "-") + (code ? "-" + code : "") + ".png", file = null;
       try { file = new File([blob], name, {type: "image/png"}); } catch(e){}
-      if (file && navigator.canShare && navigator.canShare({files: [file]}) && MOBILE) return navigator.share({files: [file], title: document.title}).catch(function(){});
+      if (file && navigator.canShare && navigator.canShare({files: [file]}) && MOBILE) return navigator.share(g.name ? {files: [file], title: document.title, text: g.text || ""} : {files: [file], title: document.title}).catch(function(){});
       var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
     }).catch(function(){ toast("រក្សាទុក QR មិនបាន"); })
@@ -1185,7 +1347,9 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   function verify(cfg){
     return fetch("https://api.github.com/repos/" + cfg.repo, {cache: "no-store", headers: {"Authorization": "Bearer " + cfg.token, "Accept": "application/vnd.github+json"}})
       .then(function(r){ if (!r.ok) throw {status: r.status}; return r.json(); })
-      .then(function(j){ if (!(j.permissions && j.permissions.push)) throw {status: 403}; return true; });
+      .then(function(j){ if (!(j.permissions && j.permissions.push)) throw {status: 403}; })
+      .then(function(){ return fetch("https://api.github.com/repos/" + cfg.repo + "/contents/?ref=" + encodeURIComponent(cfg.branch || "main"), {cache: "no-store", headers: {"Authorization": "Bearer " + cfg.token, "Accept": "application/vnd.github+json"}}); })
+      .then(function(r){ if (!r.ok) throw {status: r.status === 404 ? 404 : 403, contents: true}; return true; });
   }
   function openLogin(){
     if (OWNER) { showBar(); return; }
@@ -1212,7 +1376,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       OWNER = true; closeLogin(); showBar(); toast("ស្វាគមន៍ម្ចាស់ធៀប!");
     }).catch(function(e){
       var st = e && e.status;
-      msg.textContent = st === 401 ? "Token មិនត្រឹមត្រូវ ឬផុតកំណត់" : (st === 403 || st === 404) ? "Token នេះគ្មានសិទ្ធិសរសេរលើ repo នេះទេ" : "ពិនិត្យមិនបាន សូមពិនិត្យអ៊ីនធឺណិត";
+      msg.textContent = st === 401 ? "Token មិនត្រឹមត្រូវ ឬផុតកំណត់" : (e && e.contents) ? "Token មិនទាន់មានសិទ្ធិ Contents — នៅ GitHub កែ token៖ Repository access → " + repo + " និង Permissions → Contents → Read and write" : (st === 403 || st === 404) ? "Token នេះគ្មានសិទ្ធិសរសេរលើ repo នេះទេ" : "ពិនិត្យមិនបាន សូមពិនិត្យអ៊ីនធឺណិត";
       btn.disabled = false;
     });
   }
