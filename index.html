@@ -33,8 +33,6 @@ body{margin:0} img{max-width:100%} [hidden]{display:none!important}
   --on-gold:#3f0612;
 }
 /* owner-selectable themes */
-body.t-jade{--silk:#1f3d2f; --silk-deep:#0e2118; --glow:#2e5a43; --shade:14,33,24; --on-gold:#0e2118}
-body.t-ivory{color-scheme:light; --silk:#f7f3e6; --silk-deep:#d5e1cf; --glow:#eef3e6; --gold:#a07a2c; --gold-soft:#6f4f17; --ivory:#3e2b1d; --ink-soft:#5f4a39; --shade:247,243,230; --on-gold:#fffaf0}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -288,6 +286,13 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .names.small{flex-direction:row; justify-content:center; gap:10px; flex-wrap:wrap; align-items:baseline}
 .names.small .moul{font-size:17px}
 .names.small .amp{font-size:22px}
+.themes-wrap{display:flex; flex-direction:column; gap:6px; color:var(--ink-soft); font-size:14px}
+.themes{display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px}
+.sw{display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px 2px; border:1px solid transparent; border-radius:10px; background:none; cursor:pointer; color:var(--ink-soft); font:12px var(--f-body); line-height:1.4; position:relative}
+.sw i{display:block; width:40px; height:40px; border-radius:50%; position:relative; overflow:hidden}
+.sw.on{border-color:var(--edit); background:rgba(126,200,184,.12)}
+.sw.on i::after{content:"✓"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-style:normal; font-size:18px; text-shadow:0 1px 3px #000}
+.sw input[type=color]{position:absolute; inset:-8px; width:60px; height:60px; opacity:0; cursor:pointer; border:0; padding:0}
 .loading{display:grid; place-items:center; height:70vh; color:var(--gold)}
 </style>
 </head>
@@ -301,7 +306,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   var GUEST = "", GCODE = ""; try { var QS = new URLSearchParams(location.search); GUEST = (QS.get("to") || "").trim().slice(0, 80); GCODE = (QS.get("g") || "").trim().slice(0, 12); } catch(e){}
   var OWNER = false; // becomes true only after the GitHub token is verified to have write access
   var LOCAL = {}, PENDING = {}, INBOX = null, unsubAuth = null, unsubSnap = null;
-  function normalize(){ if (!S.sec) S.sec = 6; ["music","cdPhoto","cover","video","videoLink","qr","introPhoto"].forEach(function(k){ if (S[k] == null) S[k] = ""; }); if (!S.theme) S.theme = "silk"; if (!Array.isArray(S.photos)) S.photos = []; if (!S.guests || typeof S.guests !== "object") S.guests = {}; delete S.wishesApi; if (S.fb === undefined) S.fb = null; }
+  function normalize(){ if (!S.sec) S.sec = 6; ["music","cdPhoto","cover","video","videoLink","qr","introPhoto"].forEach(function(k){ if (S[k] == null) S[k] = ""; }); if (!S.theme || (S.theme !== "custom" && typeof THEMES === "object" && !THEMES[S.theme])) S.theme = "silk"; if (!Array.isArray(S.photos)) S.photos = []; if (!S.guests || typeof S.guests !== "object") S.guests = {}; delete S.wishesApi; if (S.fb === undefined) S.fb = null; }
   normalize();
   var app = document.getElementById("app");
   var mode = "play", editing = false, dirty = false, busy = 0;
@@ -315,6 +320,42 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   function set(p, v){ var ks = p.split("."), o = S; for (var i=0;i<ks.length-1;i++) o = o[ks[i]]; o[ks[ks.length-1]] = v; }
   function T(tag, k, cls){ return "<" + tag + (cls ? ' class="' + cls + '"' : "") + ' data-k="' + k + '">' + esc(get(k)) + "</" + tag + ">"; }
   function X(act, label, extra){ return editing ? '<button class="tool over" data-act="' + act + '"' + (extra||"") + ' aria-label="' + label + '">×</button>' : ""; }
+
+  // ---- colour themes: every token derives from a few base colours ----
+  var GOLD = {gold: "#d9b25f", soft: "#f0d79a", ivory: "#fbf3e2", inks: "#e9d3bf"};
+  var THEMES = {
+    silk:  {n: "ក្រហមសូត្រ",   silk: "#5c0c1c", deep: "#3f0612", glow: "#7a1427"},
+    rose:  {n: "ផ្កាឈូកចាស់", silk: "#6b2340", deep: "#47122a", glow: "#8e3558"},
+    plum:  {n: "ស្វាយរាជ",     silk: "#3e1a4d", deep: "#250d30", glow: "#5d2a72"},
+    navy:  {n: "ខៀវរាជវាំង",  silk: "#14284b", deep: "#0a1730", glow: "#23407a"},
+    teal:  {n: "ខៀវបៃតង",     silk: "#0f3f45", deep: "#07262a", glow: "#1a5d66"},
+    jade:  {n: "បៃតងព្រៃ",     silk: "#1f3d2f", deep: "#0e2118", glow: "#2e5a43"},
+    choco: {n: "ត្នោតកាហ្វេ",  silk: "#4a2c1d", deep: "#2e190f", glow: "#6b4330"},
+    black: {n: "ខ្មៅមាស",      silk: "#1c1915", deep: "#0b0a08", glow: "#332d26"},
+    ivory: {n: "សភ្លឺ",         light: 1, silk: "#f7f3e6", deep: "#d5e1cf", glow: "#eef3e6", gold: "#a07a2c", soft: "#6f4f17", ivory: "#3e2b1d", inks: "#5f4a39"},
+    blush: {n: "ផ្កាឈូកស្រាល", light: 1, silk: "#fbeef0", deep: "#ecd0d6", glow: "#fff7f8", gold: "#a8742f", soft: "#7a4a1e", ivory: "#4a2530", inks: "#6d4651"},
+    sky:   {n: "ខៀវស្រាល",     light: 1, silk: "#eef3f8", deep: "#cfdceb", glow: "#f8fbff", gold: "#9c7a35", soft: "#6a4f1c", ivory: "#1f2f45", inks: "#4a5a70"},
+    sand:  {n: "ក្រែមមាស",     light: 1, silk: "#f4ead8", deep: "#e0cfae", glow: "#fbf5ea", gold: "#9a6f25", soft: "#6b4813", ivory: "#3d2a14", inks: "#65503a"}
+  };
+  function hexRgb(h){ h = String(h || "").replace("#", ""); if (h.length === 3) h = h.replace(/./g, "$&$&"); var n = parseInt(h, 16); return isNaN(n) ? [92, 12, 28] : [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+  function mix(h, t, k){ var a = hexRgb(h), b = hexRgb(t); return "#" + a.map(function(v, i){ return ("0" + Math.round(v + (b[i] - v) * k).toString(16)).slice(-2); }).join(""); }
+  function themeOf(k){
+    var t = THEMES[k];
+    if (k === "custom") {
+      var c = S.customColor || "#7a1f3d", rgb = hexRgb(c), lum = (.299 * rgb[0] + .587 * rgb[1] + .114 * rgb[2]) / 255;
+      t = lum > .62 ? {light: 1, silk: c, deep: mix(c, "#000000", .14), glow: mix(c, "#ffffff", .5), gold: "#9c7a35", soft: "#6a4f1c", ivory: mix(c, "#000000", .8), inks: mix(c, "#000000", .62)}
+                    : {silk: c, deep: mix(c, "#000000", .38), glow: mix(c, "#ffffff", .18)};
+    }
+    t = t || THEMES.silk;
+    return {light: !!t.light, silk: t.silk, deep: t.deep, glow: t.glow, gold: t.gold || GOLD.gold, soft: t.soft || GOLD.soft, ivory: t.ivory || GOLD.ivory, inks: t.inks || GOLD.inks};
+  }
+  function applyTheme(){
+    var t = themeOf(S.theme), st = document.body.style, shade = hexRgb(t.light ? t.silk : t.deep).join(",");
+    [["--silk", t.silk], ["--silk-deep", t.deep], ["--glow", t.glow], ["--gold", t.gold], ["--gold-soft", t.soft], ["--ivory", t.ivory], ["--ink-soft", t.inks], ["--shade", shade], ["--on-gold", t.light ? "#fffaf0" : t.deep]]
+      .forEach(function(v){ st.setProperty(v[0], v[1]); });
+    st.colorScheme = t.light ? "light" : "dark";
+    var m = document.querySelector('meta[name="theme-color"]'); if (!m) { m = document.createElement("meta"); m.name = "theme-color"; document.head.appendChild(m); } m.content = t.deep;
+  }
 
   // vintage filigree ornaments (original drawings)
   // Original vintage filigree pieces (hand-drawn paths), mirrored for symmetry.
@@ -475,7 +516,9 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       P.push(page("<h2>ការកំណត់ (មើលឃើញតែអ្នក)</h2>" +
         '<label for="in-start">ម៉ោងចាប់ផ្តើម (សម្រាប់រាប់ថយក្រោយ និងប្រតិទិន)<input id="in-start" type="datetime-local" data-f="start" value="' + esc(S.start) + '"></label>' +
         '<label for="in-end">ម៉ោងបញ្ចប់<input id="in-end" type="datetime-local" data-f="end" value="' + esc(S.end) + '"></label>' +
-        '<label for="in-theme">ពណ៌ធៀប<select id="in-theme" data-f="theme">' + [["silk","ក្រហមសូត្រ និងមាស"],["jade","បៃតងព្រៃ និងមាស"],["ivory","សភ្លឺ និងមាស"]].map(function(o){ return '<option value="' + o[0] + '"' + (S.theme === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" +
+        '<div class="themes-wrap"><span>ពណ៌ធៀប</span><div class="themes" role="radiogroup" aria-label="ពណ៌ធៀប">' + Object.keys(THEMES).map(function(k){ var t = themeOf(k);
+          return '<button type="button" class="sw' + (S.theme === k ? " on" : "") + '" data-act="theme" data-t="' + k + '" role="radio" aria-checked="' + (S.theme === k) + '"><i style="background:linear-gradient(135deg,' + t.glow + "," + t.silk + " 55%," + t.deep + ');box-shadow:inset 0 0 0 3px ' + t.gold + '"></i><small>' + THEMES[k].n + "</small></button>"; }).join("") +
+          '<label class="sw' + (S.theme === "custom" ? " on" : "") + '" for="in-ccol"><i style="background:' + esc(S.customColor || "#7a1f3d") + '"><input id="in-ccol" type="color" data-f="customColor" value="' + esc(S.customColor || "#7a1f3d") + '"></i><small>ពណ៌ផ្ទាល់ខ្លួន</small></label></div></div>' +
         '<div class="row">រូបសម្រាប់ទំព័ររាប់ថយក្រោយ៖ ' + (S.cdPhoto ? '<span>មានហើយ</span><button class="tool" data-act="del-cdphoto">ដកចេញ</button>' : '<button class="tool" data-act="pick" data-target="cdPhoto">+ ដាក់រូប</button><span class="lunar">(បើមិនដាក់ ប្រើរូបទីមួយក្នុងអាល់ប៊ុម)</span>') + "</div>" +
         '<label for="in-ititle">ចំណងជើងទំព័របើក (ចុះបន្ទាត់បាន)<textarea id="in-ititle" rows="2" data-f="introTitle">' + esc(S.introTitle || "សិរីសួស្តី\nអាពាហ៍ពិពាហ៍") + "</textarea></label>" +
         '<label for="in-gdef">ឈ្មោះលើស្លាក (ពេលបើកលីងគ្មានឈ្មោះ)<input id="in-gdef" data-f="guestDefault" value="' + esc(S.guestDefault || "ភ្ញៀវកិត្តិយស") + '"></label>' +
@@ -507,7 +550,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 
   function render(){
     clearTimeout(cdTimer);
-    document.body.classList.remove("t-silk","t-jade","t-ivory"); document.body.classList.add("t-" + (S.theme || "silk"));
+    applyTheme();
     if (mode === "inbox") {
       app.className = "list";
       app.innerHTML = '<div class="backbar"><button class="btn" data-ui="toplay">← ត្រលប់ទៅធៀប</button></div>' +
@@ -742,6 +785,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     else if (act === "del-qr") S.qr = "";
     else if (act === "del-music") S.music = "";
     else if (act === "del-cdphoto") S.cdPhoto = "";
+    else if (act === "theme") S.theme = b.dataset.t;
     else if (act === "del-intro") S.introPhoto = "";
     else if (act === "pick") { pick(b.dataset.target); return; }
     else if (act === "download") { downloadJson(); return; }
@@ -781,9 +825,10 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     } else if (el.dataset && el.dataset.f) {
       var f = el.dataset.f; S[f] = f === "sec" ? Math.max(3, Math.min(20, +el.value || 6)) : el.value.trim(); markDirty();
       if (f === "start") countdown();
+      if (f === "customColor") { S.theme = "custom"; applyTheme(); }
     }
   });
-  app.addEventListener("change", function(e){ var f = e.target.dataset && e.target.dataset.f; if (f === "map" || f === "videoLink" || f === "theme") render(); });
+  app.addEventListener("change", function(e){ var f = e.target.dataset && e.target.dataset.f; if (f === "map" || f === "videoLink" || f === "customColor") render(); });
 
   // ---- uploads: kept on this device until "Save" commits them to GitHub ----
   function pick(target){
@@ -951,7 +996,6 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   }
   // ---- QR code ----
   var QRLIB = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
-  var QRINK = {silk: "#3f0612", jade: "#0e2118", ivory: "#3e2b1d"};
   function qrLib(){ return window.qrcode ? Promise.resolve(window.qrcode) : loadScript(QRLIB).catch(function(){ return loadScript("https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"); }).then(function(){ return window.qrcode; }); }
   function couplePhoto(){ return S.cover || S.photos[0] || S.cdPhoto || ""; }
   function svgImg(svg, color){
@@ -970,7 +1014,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   // draw the QR (with the couple's photo in a round centre) into ctx at x,y size
   function paintQR(ctx, Q, im, x, y, size){
     var qr = Q(0, "H"); qr.addData(baseUrl()); qr.make();
-    var n = qr.getModuleCount(), quiet = 2, cell = size / (n + quiet * 2), ink = QRINK[S.theme] || QRINK.silk;
+    var n = qr.getModuleCount(), quiet = 2, cell = size / (n + quiet * 2), ink = themeOf(S.theme).light ? themeOf(S.theme).ivory : themeOf(S.theme).deep;
     ctx.save();
     ctx.fillStyle = "#fffaf0"; rrect(ctx, x, y, size, size, size * .05); ctx.fill();
     ctx.fillStyle = ink;
