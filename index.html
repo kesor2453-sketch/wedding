@@ -433,6 +433,50 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .mapbox{position:relative; width:100%; aspect-ratio:4/3; max-width:100%; max-height:34vh; border:2px solid var(--gold); outline:1px solid rgba(217,178,95,.45); outline-offset:3px; border-radius:10px; overflow:hidden; background:rgba(var(--shade),.6)}
 .mapbox iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
 .mapedit{display:flex; flex-direction:column; gap:10px; text-align:left; padding:10px; border:1px dashed var(--edit); border-radius:8px}
+/* programme styles */
+.sstyle{display:flex; flex-direction:column; gap:4px; font-size:14px; color:var(--ink-soft); text-align:left}
+.sstyle select{font:14px var(--f-body); padding:8px; border-radius:6px; border:1px solid rgba(126,200,184,.6); background:var(--silk-deep); color:var(--ivory)}
+.one-sess{font-size:15px; color:var(--gold); text-align:center}
+.one{display:flex; flex-direction:column; align-items:center; gap:8px}
+.one-ic{width:112px; height:112px; border-radius:50%; display:grid; place-items:center; border:2px solid var(--gold); outline:1px solid rgba(217,178,95,.45); outline-offset:5px; background:radial-gradient(circle, var(--glow), var(--silk-deep)); color:var(--gold-soft)}
+.one-ic svg{width:58px; height:58px}
+.slide.on .one-ic{animation:icPop 1s cubic-bezier(.2,.8,.25,1.3) both .2s}
+@keyframes icPop{0%{transform:scale(.3) rotate(-25deg); opacity:0} 100%{transform:none; opacity:1}}
+.one-no{font-size:13px; color:var(--ink-soft); letter-spacing:.04em}
+.one-t{font-family:var(--f-latin); font-size:46px; font-weight:600; color:var(--gold-soft); line-height:1.1; font-variant-numeric:tabular-nums}
+.one-s{font-family:var(--f-display); font-size:calc(19px * var(--ts)); color:var(--ivory); line-height:1.8; max-width:22em}
+.one-dots{display:flex; gap:6px; margin-top:6px}
+.one-dots i{width:8px; height:8px; border-radius:50%; background:rgba(217,178,95,.3)}
+.one-dots i.done{background:var(--gold)}
+.one-dots i.now{background:var(--gold-soft); width:22px; border-radius:4px; box-shadow:0 0 8px rgba(240,215,154,.8)}
+.sline{list-style:none; margin:8px 0 0; padding:0; position:relative; display:flex; flex-direction:column; gap:16px; text-align:left}
+.sline::before{content:""; position:absolute; left:21px; top:6px; bottom:6px; width:2px; background:linear-gradient(var(--gold), var(--gold-soft)); transform-origin:top; transform:scaleY(1)}
+.slide.on .sline::before{animation:lineDraw calc(var(--cnt) * .7s) linear both .4s}
+@keyframes lineDraw{from{transform:scaleY(0)}}
+.sline li{display:grid; grid-template-columns:44px 1fr; gap:12px; align-items:center}
+.sl-node{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--silk-deep); border:2px solid var(--gold); color:var(--gold-soft); position:relative; z-index:1}
+.sl-node svg{width:24px; height:24px}
+.slide.on .sline li{animation:slIn .6s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--n) * .7s + .4s)}
+.slide.on .sl-node{animation:nodeLit .9s ease both; animation-delay:calc(var(--n) * .7s + .4s)}
+@keyframes slIn{from{opacity:0; transform:translateX(18px)}}
+@keyframes nodeLit{0%{box-shadow:0 0 0 0 rgba(240,215,154,.9); background:var(--gold); color:var(--on-gold)} 100%{box-shadow:0 0 0 12px rgba(240,215,154,0)}}
+.sl-txt{display:flex; flex-direction:column; min-width:0}
+.sl-t{font-family:var(--f-latin); font-size:20px; font-weight:600; color:var(--gold-soft); font-variant-numeric:tabular-nums; line-height:1.2}
+.sl-s{font-size:15px; color:var(--ivory); line-height:1.7}
+.scards{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px}
+.sc{position:relative; display:flex; flex-direction:column; align-items:center; gap:2px; padding:14px 8px 10px; border:1px solid rgba(217,178,95,.55); border-radius:12px; background:rgba(var(--shade),.45); text-align:center; min-width:0}
+.sc svg{width:30px; height:30px; color:var(--gold)}
+.sc-no{position:absolute; top:6px; left:8px; font-size:11px; color:var(--gold)}
+.sc-t{font-family:var(--f-latin); font-size:19px; font-weight:600; color:var(--gold-soft); font-variant-numeric:tabular-nums}
+.sc-s{font-size:13px; color:var(--ivory); line-height:1.6}
+.scards .sc:last-child:nth-child(odd){grid-column:1/-1}
+.slide.on .sc{animation:zoomIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--n) * .25s + .3s)}
+.stable{list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; text-align:left}
+.stable li{display:flex; align-items:baseline; gap:8px; font-size:15px; color:var(--ivory)}
+.stable time{font-family:var(--f-latin); font-size:19px; font-weight:600; color:var(--gold-soft); min-width:54px; font-variant-numeric:tabular-nums}
+.stable .dots{flex:0 0 22px; border-bottom:2px dotted rgba(217,178,95,.6); transform:translateY(-4px)}
+.stable span{flex:1; min-width:0; line-height:1.7}
+.slide.on .stable li{animation:rise .6s ease both; animation-delay:calc(var(--n) * .2s + .3s)}
 .order{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
 .order li{display:flex; align-items:center; gap:6px; padding:6px 8px; border:1px solid rgba(126,200,184,.45); border-radius:8px}
 .order li.off{opacity:.55}
@@ -726,17 +770,42 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     };
     B.schedule = function(){
     // 4 programme, one scene per session: a timeline for guests, an editable list for the owner
+    var style = S.schedStyle || "vine", firstTag = true;
     S.schedule.forEach(function(sess, si){
-      var body;
+      var body, ST = function(ii, f){ return "schedule." + si + ".items." + ii + "." + f; };
+      // "one per page": the film walks the guest through the programme one event at a time
+      if (!editing && style === "single") {
+        sess.items.forEach(function(it, ii){
+          P.push(page("<h2>កម្មវិធីសិរីមង្គល</h2>" + T("h3", "schedule." + si + ".title", "one-sess") +
+            '<div class="one"><div class="one-ic">' + icon(it.s) + '</div><div class="one-no">កម្មវិធីទី ' + kn(ii + 1) + " / " + kn(sess.items.length) + "</div>" +
+            T("time", ST(ii, "t"), "one-t") + T("div", ST(ii, "s"), "one-s") +
+            '<div class="one-dots">' + sess.items.map(function(_, k){ return '<i class="' + (k < ii ? "done" : k === ii ? "now" : "") + '"></i>'; }).join("") + "</div></div>",
+            {dur: Math.max(4, sec - 1), tag: firstTag ? "schedule" : ""}));
+          firstTag = false;
+        });
+        return;
+      }
       if (editing) {
         body = '<div class="session">' + T("h3","schedule." + si + ".title") + ' <button class="tool x" data-act="del-session" data-s="' + si + '" aria-label="លុបវគ្គនេះ">លុបវគ្គ ×</button><ol>' +
           sess.items.map(function(_, ii){ return "<li>" + T("time","schedule." + si + ".items." + ii + ".t") + T("span","schedule." + si + ".items." + ii + ".s") + '<button class="tool x" data-act="del-item" data-s="' + si + '" data-i="' + ii + '" aria-label="លុប">×</button></li>'; }).join("") +
           '</ol></div><button class="tool" data-act="add-item" data-s="' + si + '">+ បន្ថែមកម្មវិធី</button>' + (si === S.schedule.length - 1 ? '<button class="tool" data-act="add-session">+ បន្ថែមវគ្គ (ឧ. ថ្ងៃទីពីរ)</button>' : "");
+      } else if (style === "line") {
+        // a gold line draws down the page and each event lights up as it is reached
+        body = '<div class="session">' + T("h3","schedule." + si + ".title") + '<ol class="sline" style="--cnt:' + sess.items.length + '">' +
+          sess.items.map(function(it, ii){ return '<li style="--n:' + ii + '"><span class="sl-node">' + icon(it.s) + '</span><div class="sl-txt">' + T("time", ST(ii, "t"), "sl-t") + T("span", ST(ii, "s"), "sl-s") + "</div></li>"; }).join("") + "</ol></div>";
+      } else if (style === "cards") {
+        body = '<div class="session">' + T("h3","schedule." + si + ".title") + '<div class="scards">' +
+          sess.items.map(function(it, ii){ return '<div class="sc" style="--n:' + ii + '"><span class="sc-no">' + kn(ii + 1) + "</span>" + icon(it.s) + T("time", ST(ii, "t"), "sc-t") + T("span", ST(ii, "s"), "sc-s") + "</div>"; }).join("") + "</div></div>";
+      } else if (style === "table") {
+        body = '<div class="session">' + T("h3","schedule." + si + ".title") + '<ol class="stable">' +
+          sess.items.map(function(it, ii){ return '<li style="--n:' + ii + '">' + T("time", ST(ii, "t"), "") + '<i class="dots"></i>' + T("span", ST(ii, "s"), "") + "</li>"; }).join("") + "</ol></div>";
       } else {
         body = '<div class="session">' + T("h3","schedule." + si + ".title") + '<div class="tl">' + VINE +
           sess.items.map(function(it, ii){ return '<div class="tl-item ' + (ii % 2 ? "r" : "l") + '" style="grid-row:' + (ii + 1) + '">' + icon(it.s) + T("time","schedule." + si + ".items." + ii + ".t") + T("span","schedule." + si + ".items." + ii + ".s") + "</div>"; }).join("") + "</div></div>";
       }
-      P.push(page("<h2>កម្មវិធីសិរីមង្គល</h2>" + body, {dur: sec + 2 + sess.items.length, tag: si === 0 ? "schedule" : ""}));
+      if (editing && si === 0) body = '<label class="settings sstyle" for="in-sst">របៀបបង្ហាញកម្មវិធីសម្រាប់ភ្ញៀវ<select id="in-sst" data-f="schedStyle">' + [["vine","ខ្សែវល្លិ៍ឆ្លាស់ឆ្វេងស្តាំ"],["line","ខ្សែមាសរត់ចុះ ភ្លឺម្តងមួយៗ"],["single","មួយកម្មវិធីមួយទំព័រ (នាំពីកម្មវិធីមួយទៅមួយ)"],["cards","កាតតូចៗ ២ ជួរ"],["table","តារាងម៉ោងបុរាណ"]].map(function(o){ return '<option value="' + o[0] + '"' + (style === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" + body;
+      P.push(page("<h2>កម្មវិធីសិរីមង្គល</h2>" + body, {dur: sec + 2 + (style === "line" ? sess.items.length * 1.2 : sess.items.length), tag: firstTag ? "schedule" : ""}));
+      firstTag = false;
     });
     };
     B.photos = function(){
@@ -1333,7 +1402,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       if (f === "customColor" || f === "customAccent" || f === "customText") { S.theme = "custom"; applyTheme(); }
     }
   });
-  app.addEventListener("change", function(e){ var f = e.target.dataset && e.target.dataset.f; if (f === "map" || f === "mapQuery" || f === "videoLink" || f === "customColor" || f === "customAccent" || f === "customText" || f === "pageFx" || f === "ornament" || f === "particles") render(); });
+  app.addEventListener("change", function(e){ var f = e.target.dataset && e.target.dataset.f; if (f === "map" || f === "mapQuery" || f === "videoLink" || f === "customColor" || f === "customAccent" || f === "customText" || f === "pageFx" || f === "ornament" || f === "particles" || f === "schedStyle") render(); });
 
   // ---- uploads: kept on this device until "Save" commits them to GitHub ----
   function pick(target){
