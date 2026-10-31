@@ -273,7 +273,9 @@ body[data-shimmer="1"] .st-title:not([data-split]){background:linear-gradient(11
 .bar{position:fixed; left:0; right:0; bottom:0; z-index:20; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
   padding:12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
   background:rgba(40,4,12,.94); border-top:1px solid rgba(217,178,95,.4)}
-.bar .btn{padding:8px 16px}
+.bar .btn{padding:7px 12px; font-size:13.5px; gap:5px}
+.bar .btn svg{width:14px; height:14px}
+.bar{gap:6px}
 .bar .btn[disabled]{opacity:.45; cursor:default}
 .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(90px + env(safe-area-inset-bottom, 0px)); background:var(--ivory); color:var(--silk-deep); padding:8px 16px; border-radius:999px; font-size:14px; z-index:30; max-width:90vw}
 .lightbox{position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.92); display:flex; align-items:center; justify-content:center; padding:16px; cursor:zoom-out}
@@ -477,6 +479,44 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .stable .dots{flex:0 0 22px; border-bottom:2px dotted rgba(217,178,95,.6); transform:translateY(-4px)}
 .stable span{flex:1; min-width:0; line-height:1.7}
 .slide.on .stable li{animation:rise .6s ease both; animation-delay:calc(var(--n) * .2s + .3s)}
+/* horizontal editor */
+.list.editing{max-width:640px; gap:10px}
+.edtop{position:sticky; top:env(safe-area-inset-top, 0px); z-index:15; display:flex; align-items:center; gap:8px; padding:6px 0; background:var(--silk-deep)}
+.edtop select{flex:1; min-width:0; font:15px var(--f-body); padding:9px 10px; border-radius:10px; border:1px solid var(--edit); background:var(--silk); color:var(--ivory)}
+.edtop .ic{font-size:26px; line-height:1; flex:none}
+.hs{display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch}
+.hs::-webkit-scrollbar{display:none}
+.hs > .page{flex:0 0 100%; width:100%; scroll-snap-align:start; scroll-snap-stop:always; height:calc(100vh - 190px); height:calc(100dvh - 190px); min-height:420px; overflow-y:auto; overscroll-behavior-y:contain}
+.hs > .page.has-cover{min-height:420px}
+/* guest manager */
+.guests .gv .inner{gap:14px; padding-top:40px}
+.gstats{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+.gstats span{padding:6px 12px; border-radius:999px; background:rgba(var(--shade),.6); border:1px solid rgba(217,178,95,.4); font-size:13px; color:var(--ink-soft)}
+.gstats b{color:var(--gold-soft); font-size:16px}
+.gadd{border:1px dashed var(--edit); border-radius:10px; padding:10px}
+.gadd summary{cursor:pointer; color:var(--edit); font-size:15px}
+.gadd textarea{margin:10px 0; width:100%; font:15px var(--f-body); padding:10px; border-radius:8px; border:1px solid rgba(126,200,184,.6); background:var(--silk-deep); color:var(--ivory)}
+.gtools{display:flex; flex-direction:column; gap:8px}
+.gtools input{font:15px var(--f-body); padding:10px 12px; border-radius:999px; border:1px solid rgba(126,200,184,.6); background:var(--silk-deep); color:var(--ivory); width:100%}
+.chips{display:flex; gap:6px; flex-wrap:wrap}
+.chips button{font:13px var(--f-body); padding:6px 14px; border-radius:999px; border:1px solid rgba(217,178,95,.5); background:none; color:var(--ink-soft); cursor:pointer}
+.chips button.on{background:var(--gold); color:var(--on-gold); border-color:var(--gold)}
+.glist{display:flex; flex-direction:column; gap:6px; text-align:left}
+.grow{display:grid; grid-template-columns:auto 1fr; grid-template-areas:"no name" "btns btns"; gap:4px 10px; align-items:center; padding:8px 10px; border-radius:10px; background:rgba(var(--shade),.45); border:1px solid rgba(217,178,95,.25)}
+.grow.sent{border-color:rgba(126,200,184,.5)}
+.grow .gno{grid-area:no}
+.gname{grid-area:name; min-width:0; display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 8px}
+.gname b{color:var(--ivory); font-weight:400; font-size:15px; overflow-wrap:anywhere}
+.gname .ok{font-size:12px; color:var(--edit)}
+.gbtns{grid-area:btns; display:flex; gap:6px; flex-wrap:wrap}
+@media (min-width:560px){.grow{grid-template-columns:auto 1fr auto; grid-template-areas:"no name btns"}}
+.gb{min-width:36px; height:32px; padding:0 8px; border-radius:8px; border:0; cursor:pointer; font:600 12px var(--f-latin, sans-serif); color:#fff; display:inline-grid; place-items:center}
+.gb svg{width:16px; height:16px}
+.gb.tg{background:#229ED9}.gb.ms{background:linear-gradient(135deg,#00B2FF,#006AFF 55%,#A033FF)}.gb.ig{background:linear-gradient(45deg,#F58529,#DD2A7B 50%,#8134AF)}
+.gb.gqr{background:linear-gradient(135deg, var(--gold), #a8802f); color:#2a1606}
+.gb.cp{background:transparent; color:var(--edit); border:1px dashed var(--edit)}
+.gb.del{background:transparent; color:#f3b0a0; border:1px dashed rgba(243,176,160,.6); font-size:16px}
+.gb.del.armed{font-size:12px; background:#a33; color:#fff; border-color:#a33}
 .order{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
 .order li{display:flex; align-items:center; gap:6px; padding:6px 8px; border:1px solid rgba(126,200,184,.45); border-radius:8px}
 .order li.off{opacity:.55}
@@ -720,7 +760,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       '<button class="tool x" data-act="sec-down" data-k2="' + CURKEY + '"' + (i >= o.length - 1 ? " disabled" : "") + ' aria-label="ចុះក្រោម">↓</button>' +
       '<label class="pgshow"><input type="checkbox" data-act="sec-toggle" data-k2="' + CURKEY + '"' + (off ? "" : " checked") + "> បង្ហាញ</label></div>";
   }
-  function page(inner, opt){ opt = opt || {}; var bar = pageBar(); return {html:'<div class="page ' + (opt.cls||"") + (bar && isHidden(CURKEY) ? " pg-off" : "") + '">' + (opt.pre||"") + CORNERS + bar + '<div class="inner">' + vh(inner) + "</div></div>", dur: opt.dur || S.sec, kind: opt.kind || "text", tag: opt.tag || ""}; }
+  function page(inner, opt){ opt = opt || {}; var bar = pageBar(); return {sec: CURKEY || opt.tag || "", html:'<div class="page ' + (opt.cls||"") + (bar && isHidden(CURKEY) ? " pg-off" : "") + '">' + (opt.pre||"") + CORNERS + bar + '<div class="inner">' + vh(inner) + "</div></div>", dur: opt.dur || S.sec, kind: opt.kind || "text", tag: opt.tag || ""}; }
   var PSTART = {};
   var NAV_ICONS = ["cal","pin","chat","clock","img","gift","heart","qr","play","star"];
   var NAV_DEFAULT = [{k: "date", l: "ថ្ងៃខែ", i: "cal"}, {k: "venue", l: "ទីតាំង", i: "pin"}, {k: "wishes", l: "ជូនពរ", i: "chat"}, {k: "schedule", l: "កម្មវិធី", i: "clock"}];
@@ -967,10 +1007,6 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<label for="gh-token">Token (Fine-grained, Contents: Read and write)<input id="gh-token" type="password" data-gh="token" value="' + esc(G.token || "") + '" autocomplete="off"></label>' +
         '<p class="lunar" style="margin:0">មានតែអ្នកដែលមាន token នេះទេ ទើបរក្សាទុកការកែបាន។ កុំផ្ញើ token ឲ្យអ្នកណា។</p>' +
         '<div class="row"><button class="tool" data-act="download">ទាញយក data.json</button></div>', {cls:"settings"}));
-      P.push(page("<h2>បង្កើតលីងសម្រាប់ភ្ញៀវ</h2>" +
-        '<label for="g-names">ឈ្មោះភ្ញៀវ (បញ្ចូលម្តងបានច្រើន មួយបន្ទាត់មួយនាក់ ឬដាក់សញ្ញាក្បៀស)<textarea id="g-names" rows="6" placeholder="លោក សុខ ដារ៉ា&#10;អ្នកនាង ចាន់ ស្រីនិច&#10;លោក លោកស្រី ហេង វណ្ណា">' + esc(savedGuests()) + '</textarea></label>' +
-        '<div class="row"><button class="btn solid" data-act="make-links">បង្កើតលីងទាំងអស់</button><button class="tool" data-act="copy-all-links">ចម្លងលីងទាំងអស់</button></div><div class="links" id="g-links"></div>' +
-        '<p class="lunar" style="margin:0">លីងទូទៅ (គ្មានឈ្មោះ)៖ ' + esc(baseUrl()) + "</p>", {cls:"settings"}));
     }
     return P;
   }
@@ -990,10 +1026,18 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     }
     P = pages();
     if (cur >= P.length) cur = P.length - 1;
+    if (mode === "guests") { app.className = "list guests"; app.innerHTML = guestsView(); guestList(); setTimeout(applyFonts, 0); return; }
     if (mode === "list") {
       app.className = "list" + (editing ? " editing" : "");
       setTimeout(applyFonts, 0);
-      app.innerHTML = (editing ? "" : '<div class="backbar"><button class="btn solid" data-ui="toplay">' + I.play + " ចាក់ជាវីដេអូ</button></div>") + P.map(function(p){ return p.html; }).join("");
+      if (editing) {
+        // one page at a time, side by side: swipe left/right or use ‹ › and the page picker
+        var labels = P.map(function(p, i){ var h = (p.html.match(/<h2>([\s\S]*?)<\/h2>/) || [])[1]; h = h ? h.replace(/<[^>]+>/g, "").trim() : ""; return (i === 0 ? "ទំព័រគម្រប" : (p.sec ? secLabel(p.sec) : h) || h || ("ទំព័រ " + (i + 1))); });
+        app.innerHTML = '<div class="edtop"><button class="ic" data-ed="-1" aria-label="ទំព័រមុន">‹</button><select id="ed-jump" aria-label="ទៅទំព័រ">' + labels.map(function(l, i){ return '<option value="' + i + '">' + kn(i + 1) + ". " + esc(l) + "</option>"; }).join("") + '</select><button class="ic" data-ed="1" aria-label="ទំព័របន្ទាប់">›</button></div>' +
+          '<div class="hs" id="hs">' + P.map(function(p){ return p.html; }).join("") + "</div>";
+        edRestore();
+      } else
+      app.innerHTML = '<div class="backbar"><button class="btn solid" data-ui="toplay">' + I.play + " ចាក់ជាវីដេអូ</button></div>" + P.map(function(p){ return p.html; }).join("");
       if (editing) app.querySelectorAll("[data-k]").forEach(function(el){
         try { el.contentEditable = "plaintext-only"; } catch(e){}
         if (el.contentEditable !== "plaintext-only") el.contentEditable = "true";
@@ -1023,7 +1067,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         "</div>";
       applyZoom(); show(cur, true); sparksInit(); splitLetters(app);
     }
-    countdown(); drawQRs(); if (OWNER && editing) makeLinks(true);
+    countdown(); drawQRs();
     document.title = "ធៀបការ " + S.groom + " & " + S.bride;
   }
 
@@ -1336,14 +1380,14 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       if (act === "sec-toggle") { S.hidden[kk] = !b.checked; if (!S.hidden[kk]) delete S.hidden[kk]; }
       else { var oo = sectionOrder(), a1 = oo.indexOf(kk), a2 = a1 + (act === "sec-up" ? -1 : 1); if (a2 >= 0 && a2 < oo.length) { oo.splice(a2, 0, oo.splice(a1, 1)[0]); S.order = oo; } }
       markDirty(); render();
-      setTimeout(function(){ var el = app.querySelector('.pgbar[data-pg="' + kk + '"]'); if (el) el.scrollIntoView({block: "center", behavior: "smooth"}); }, 30);
+      setTimeout(function(){ edShowEl(app.querySelector('.pgbar[data-pg="' + kk + '"]')); }, 30);
       return;
     }
     else if (act === "sec-up" || act === "sec-down") { var o = sectionOrder(), i = o.indexOf(b.dataset.k2), j = i + (act === "sec-up" ? -1 : 1); if (j >= 0 && j < o.length) { o.splice(j, 0, o.splice(i, 1)[0]); S.order = o; } }
     else if (act === "add-page") {
       var nid = Date.now().toString(36); S.custom.push({id: nid, title: "ចំណងជើងទំព័រ", text: "សរសេរខ្លឹមសារនៅទីនេះ…", img: ""});
       var o2 = sectionOrder().filter(function(k){ return k !== "c" + nid; }), at = o2.indexOf("closing"); o2.splice(at < 0 ? o2.length : at, 0, "c" + nid); S.order = o2;
-      markDirty(); render(); setTimeout(function(){ var el = app.querySelector('[data-k="custom.' + (S.custom.length - 1) + '.title"]'); if (el) { el.scrollIntoView({block: "center"}); el.focus(); } }, 50); toast("បានបន្ថែមទំព័រថ្មី — ប៉ះលើអក្សរដើម្បីកែ"); return;
+      markDirty(); render(); setTimeout(function(){ var el = app.querySelector('[data-k="custom.' + (S.custom.length - 1) + '.title"]'); if (el) { edShowEl(el); el.focus(); } }, 50); toast("បានបន្ថែមទំព័រថ្មី — ប៉ះលើអក្សរដើម្បីកែ"); return;
     }
     else if (act === "del-page") {
       if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "ចុចម្តងទៀតដើម្បីលុប"; setTimeout(function(){ if (b.isConnected) { delete b.dataset.armed; b.textContent = "លុបទំព័រនេះ"; } }, 3000); return; }
@@ -1458,7 +1502,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     return p.then(function(buf){ var body = {message: "Update " + path, content: b64(buf), branch: cfg.branch || "main"}; if (sha) body.sha = sha; return api(cfg, path, body); });
   }
   function save(btn){
-    var cfg = gh();
+    btn = btn || {}; var cfg = gh();
     if (!OWNER) { toast("សូមចូលជាម្ចាស់ធៀបជាមុនសិន"); return; }
     if (!cfg.repo || !cfg.token) { toast("សូមបំពេញ Repo និង Token នៅទំព័រ «ភ្ជាប់ GitHub» ជាមុនសិន"); return; }
     btn.disabled = true; btn.textContent = "កំពុងរក្សាទុក…";
@@ -1487,43 +1531,101 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   var LINKS = [];
   var MOBILE = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
   function savedGuests(){ try { return localStorage.getItem("guests") || ""; } catch(e){ return ""; } }
-  function makeLinks(quiet){
-    var ta = document.getElementById("g-names"), box = document.getElementById("g-links"); if (!ta || !box) return;
+  // ---- horizontal editor ----
+  var EDIDX = 0, edT;
+  function edCount(){ var hs = document.getElementById("hs"); return hs ? hs.children.length : 0; }
+  function edGo(i, smooth){
+    var hs = document.getElementById("hs"); if (!hs) return;
+    EDIDX = Math.max(0, Math.min(edCount() - 1, i));
+    hs.scrollTo({left: EDIDX * hs.clientWidth, behavior: smooth === false ? "auto" : "smooth"}); edSync();
+  }
+  function edSync(){
+    var sel = document.getElementById("ed-jump"); if (sel) sel.value = EDIDX;
+    app.querySelectorAll("[data-ed]").forEach(function(b){ b.disabled = (+b.dataset.ed < 0 && EDIDX <= 0) || (+b.dataset.ed > 0 && EDIDX >= edCount() - 1); });
+  }
+  function edRestore(){
+    var hs = document.getElementById("hs"); if (!hs) return;
+    requestAnimationFrame(function(){ hs.scrollLeft = Math.min(EDIDX, edCount() - 1) * hs.clientWidth; edSync(); });
+    hs.addEventListener("scroll", function(){ clearTimeout(edT); edT = setTimeout(function(){ EDIDX = Math.round(hs.scrollLeft / Math.max(1, hs.clientWidth)); edSync(); }, 80); }, {passive: true});
+  }
+  function edShowEl(el){
+    var hs = document.getElementById("hs"); if (!hs || !el) return;
+    var pg = el.closest(".page"), i = Array.prototype.indexOf.call(hs.children, pg); if (i < 0) return;
+    edGo(i, false); setTimeout(function(){ el.scrollIntoView({block: "center", inline: "nearest"}); }, 60);
+  }
+  app.addEventListener("click", function(e){ var b = e.target.closest("[data-ed]"); if (b) edGo(EDIDX + +b.dataset.ed); });
+  app.addEventListener("change", function(e){ if (e.target.id === "ed-jump") edGo(+e.target.value); });
+  window.addEventListener("resize", function(){ if (editing) edGo(EDIDX, false); });
+
+  // ---- guest links: a screen of its own, easy to search when the list is long ----
+  var GF = "all", GQ = "";
+  function guestsView(){
+    var n = Object.keys(S.guests).length;
+    return '<div class="backbar"><button class="btn" data-ui="toplay">← ត្រលប់ទៅធៀប</button></div>' +
+      '<div class="page settings gv"><div class="inner"><h2>លីងសម្រាប់ភ្ញៀវ</h2><div class="gstats" id="gstats"></div>' +
+      '<details class="gadd"' + (n ? "" : " open") + '><summary>+ បន្ថែមភ្ញៀវ (បិទភ្ជាប់ឈ្មោះច្រើននាក់ម្តង)</summary>' +
+        '<label class="sr" for="g-names">ឈ្មោះភ្ញៀវ</label><textarea id="g-names" rows="5" placeholder="មួយបន្ទាត់មួយនាក់ ឬដាក់ក្បៀស&#10;លោក សុខ ដារ៉ា&#10;អ្នកនាង ចាន់ ស្រីនិច">' + esc(savedGuests()) + '</textarea>' +
+        '<button class="btn solid" data-gact="add">បង្កើតលីង</button></details>' +
+      '<div class="gtools"><label class="sr" for="g-q">ស្វែងរក</label><input id="g-q" type="search" placeholder="ស្វែងរកឈ្មោះ ឬលេខ…" value="' + esc(GQ) + '">' +
+        '<div class="chips">' + [["all","ទាំងអស់"],["todo","មិនទាន់ផ្ញើ"],["sent","ផ្ញើរួច"]].map(function(c){ return '<button data-gf="' + c[0] + '"' + (GF === c[0] ? ' class="on"' : "") + ">" + c[1] + "</button>"; }).join("") + "</div></div>" +
+      '<div class="glist" id="g-links"></div>' +
+      '<div class="row"><button class="tool" data-gact="copyall">' + I.copy + ' ចម្លងលីងដែលកំពុងបង្ហាញ</button></div>' +
+      '<p class="lunar" style="margin:0">លីងទូទៅ (គ្មានឈ្មោះ)៖ ' + esc(baseUrl()) + "</p></div></div>";
+  }
+  function guestRows(){
+    return Object.keys(S.guests).sort(function(a, b){ var na = /^\d+$/.test(a), nb = /^\d+$/.test(b); return na && nb ? a - b : na ? -1 : nb ? 1 : a < b ? -1 : 1; })
+      .map(function(id){ var nm = S.guests[id]; return {id: id, name: nm, link: baseUrl() + "?g=" + id, text: "សូមគោរពអញ្ជើញ " + nm + " ចូលរួមពិធីអាពាហ៍ពិពាហ៍ " + S.groom + " និង " + S.bride}; });
+  }
+  function guestList(){
+    var box = document.getElementById("g-links"); if (!box) return;
+    var all = guestRows(), log = sentLog(), q = GQ.trim().toLowerCase();
+    var sent = all.filter(function(g){ return log[g.name]; }).length;
+    var st = document.getElementById("gstats"); if (st) st.innerHTML = '<span><b>' + kn(all.length) + "</b> ភ្ញៀវ</span><span><b>" + kn(sent) + "</b> ផ្ញើរួច</span><span><b>" + kn(all.length - sent) + "</b> នៅសល់</span>";
+    LINKS = all.filter(function(g){ return (!q || g.name.toLowerCase().indexOf(q) >= 0 || g.id.indexOf(q.replace("#", "")) === 0) && (GF === "all" || (GF === "sent") === !!log[g.name]); });
+    if (!all.length) { box.innerHTML = '<p class="lunar">មិនទាន់មានភ្ញៀវទេ — ចុច «បន្ថែមភ្ញៀវ» ខាងលើ</p>'; return; }
+    if (!LINKS.length) { box.innerHTML = '<p class="lunar">រកមិនឃើញ</p>'; return; }
+    var B2 = function(via, i, cls, label, inner){ return '<button class="gb ' + cls + '" data-gact="share" data-via="' + via + '" data-i="' + i + '" title="' + label + '" aria-label="' + label + '">' + inner + "</button>"; };
+    box.innerHTML = LINKS.map(function(l, i){
+      var done = log[l.name];
+      return '<div class="grow' + (done ? " sent" : "") + '"><span class="gno">#' + esc(l.id) + '</span><div class="gname"><b>' + esc(l.name) + "</b>" + (done ? '<small class="ok">✓ ' + esc(done) + "</small>" : "") + "</div>" +
+        '<div class="gbtns">' + B2("telegram", i, "tg", "Telegram", "TG") + B2("messenger", i, "ms", "Messenger", "M") + B2("instagram", i, "ig", "Instagram", "IG") + B2("qr", i, "gqr", "QR មានឈ្មោះ", I.qr) + B2("copy", i, "cp", "ចម្លង", I.copy) +
+        '<button class="gb del" data-gact="del" data-id="' + esc(l.id) + '" title="លុប" aria-label="លុប">×</button></div></div>';
+    }).join("");
+  }
+  function addGuests(){
+    var ta = document.getElementById("g-names"); if (!ta) return;
     var seen = {}, names = ta.value.split(/[\n,،]+/).map(function(x){ return x.trim(); }).filter(function(x){ if (!x || seen[x]) return false; seen[x] = 1; return true; });
-    if (!names.length) { box.innerHTML = quiet ? "" : '<p class="lunar">សូមសរសេរឈ្មោះភ្ញៀវជាមុនសិន</p>'; LINKS = []; return; }
-    // give every guest a short code; new codes are saved to data.json so the link can show the name
+    if (!names.length) { toast("សូមសរសេរឈ្មោះភ្ញៀវជាមុនសិន"); return; }
     var byName = {}, added = 0; Object.keys(S.guests).forEach(function(k){ byName[S.guests[k]] = k; });
-    if (!quiet) names.forEach(function(nm){
+    names.forEach(function(nm){
       if (byName[nm]) return;
-      // guest numbers in order: 01, 02, 03 … (100 and up just keep counting)
       var next = Object.keys(S.guests).reduce(function(m, k){ return /^\d+$/.test(k) ? Math.max(m, +k) : m; }, 0) + 1, id;
       do { id = next < 100 ? ("0" + next).slice(-2) : String(next); next++; } while (S.guests[id]);
       S.guests[id] = nm; byName[nm] = id; added++;
     });
-    LINKS = names.filter(function(nm){ return byName[nm]; }).map(function(nm){ return {name: nm, link: baseUrl() + "?g=" + byName[nm], text: "សូមគោរពអញ្ជើញ " + nm + " ចូលរួមពិធីអាពាហ៍ពិពាហ៍ " + S.groom + " និង " + S.bride}; });
-    if (added) {
-      markDirty();
-      var sb = document.getElementById("b-save");
-      if (sb && !busy) { save(sb); toast("កំពុងរក្សាទុកលីងថ្មី " + kn(added) + "… រង់ចាំ ១–២ នាទី មុនផ្ញើ"); }
-    }
-    if (!LINKS.length) { box.innerHTML = quiet ? "" : '<p class="lunar">សូមចុច «បង្កើតលីងទាំងអស់»</p>'; return; }
-    box.innerHTML = '<p class="lunar" style="margin:0">បានបង្កើត ' + kn(LINKS.length) + ' លីង</p>' + LINKS.map(function(l, i){
-      var done = sentLog()[l.name];
-      var gno = l.link.split("g=")[1] || "";
-      return '<div class="link-row' + (done ? " sent" : "") + '"><b><span class="gno">#' + esc(gno) + "</span> " + esc(l.name) + (done ? ' <small class="ok">✓ បានផ្ញើតាម ' + esc(done) + "</small>" : "") + '</b><code>' + esc(l.link) + '</code><div class="share">' +
-        '<button class="sh tg" data-act="share" data-via="telegram" data-i="' + i + '">Telegram</button>' +
-        '<button class="sh ms" data-act="share" data-via="messenger" data-i="' + i + '">Messenger</button>' +
-        '<button class="sh ig" data-act="share" data-via="instagram" data-i="' + i + '">Instagram</button>' +
-        '<button class="sh qr" data-act="share" data-via="qr" data-i="' + i + '">' + I.img + " QR មានឈ្មោះ</button>" +
-        '<button class="sh cp" data-act="share" data-via="copy" data-i="' + i + '">' + I.copy + " ចម្លង</button>" +
-        '<button class="sh cp" data-act="share" data-via="rich" data-i="' + i + '" title="បិទភ្ជាប់ក្នុង Telegram លើកុំព្យូទ័រ៖ ឃើញតែអក្សរ ចុចបាន">ចម្លងអក្សរមានលីងលាក់</button>' +
-        (navigator.share ? '<button class="sh cp" data-act="share" data-via="more" data-i="' + i + '">ផ្សេងៗ…</button>' : "") +
-        "</div></div>";
-    }).join("");
+    ta.value = ""; try { localStorage.removeItem("guests"); } catch(e){}
+    GF = "all"; GQ = ""; render();
+    if (added) { markDirty(); save({}); toast("បានបន្ថែម " + kn(added) + " នាក់ — កំពុងរក្សាទុក… រង់ចាំ ១–២ នាទី មុនផ្ញើ"); }
+    else toast("ឈ្មោះទាំងនេះមានរួចហើយ");
   }
+  app.addEventListener("click", function(e){
+    if (mode !== "guests") return;
+    var f = e.target.closest("[data-gf]"); if (f) { GF = f.dataset.gf; app.querySelectorAll("[data-gf]").forEach(function(x){ x.classList.toggle("on", x === f); }); guestList(); return; }
+    var b = e.target.closest("[data-gact]"); if (!b) return;
+    var a = b.dataset.gact;
+    if (a === "add") addGuests();
+    else if (a === "share") sendVia(b.dataset.via, +b.dataset.i, b);
+    else if (a === "copyall") copyText(LINKS.map(function(l){ return l.name + "\n" + l.link; }).join("\n\n"), b);
+    else if (a === "del") {
+      if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "លុប?"; b.classList.add("armed"); setTimeout(function(){ if (b.isConnected) { delete b.dataset.armed; b.textContent = "×"; b.classList.remove("armed"); } }, 3000); return; }
+      delete S.guests[b.dataset.id]; guestList(); markDirty(); save({}); toast("បានលុប — កំពុងរក្សាទុក…");
+    }
+  });
+  app.addEventListener("input", function(e){ if (mode === "guests" && e.target.id === "g-q") { GQ = e.target.value; guestList(); } if (mode === "guests" && e.target.id === "g-names") { try { localStorage.setItem("guests", e.target.value); } catch(err){} } });
+  function makeLinks(){ guestList(); }
   var VIA = {telegram: "Telegram", messenger: "Messenger", instagram: "Instagram"};
   function sentLog(){ try { return JSON.parse(localStorage.getItem("sent") || "{}"); } catch(e){ return {}; } }
-  function markSent(name, via){ var g = sentLog(); g[name] = VIA[via] || via; try { localStorage.setItem("sent", JSON.stringify(g)); } catch(e){} makeLinks(true); }
+  function markSent(name, via){ var g = sentLog(); g[name] = VIA[via] || via; try { localStorage.setItem("sent", JSON.stringify(g)); } catch(e){} guestList(); }
   // before opening Telegram / Messenger / Instagram, confirm the guest so the right name goes to the right person
   function askConfirm(l, via, go){
     var old = document.getElementById("ask"); if (old) old.remove();
@@ -1756,11 +1858,12 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var bar = document.getElementById("bar"); if (!bar) return;
     bar.innerHTML = editing
       ? '<button class="btn solid" id="b-save"' + (dirty && !busy ? "" : " disabled") + ">" + (busy ? "កំពុងបញ្ចូល…" : "រក្សាទុក") + '</button><button class="btn" id="b-cancel">' + (dirty ? "បោះបង់" : "បិទការកែ") + "</button>"
-      : '<button class="btn solid" id="b-edit">កែប្រែធៀប</button>' + (fbOk() ? '<button class="btn" id="b-inbox">' + I.chat + " ពាក្យជូនពរ</button>" : "") + '<button class="btn" id="b-hide" title="លាក់ប៊ូតុង (ចុច ៥ ដងលើកាលបរិច្ឆេទដើម្បីបង្ហាញវិញ)">លាក់</button><button class="btn" id="b-logout">ចាកចេញ</button>';
+      : '<button class="btn solid" id="b-edit">កែប្រែធៀប</button><button class="btn" id="b-guests">' + I.send + " លីងភ្ញៀវ</button>" + (fbOk() ? '<button class="btn" id="b-inbox">' + I.chat + " ពាក្យជូនពរ</button>" : "") + '<button class="btn" id="b-hide" title="លាក់ប៊ូតុង (ចុច ៥ ដងលើកាលបរិច្ឆេទដើម្បីបង្ហាញវិញ)">លាក់</button><button class="btn" id="b-logout">ចាកចេញ</button>';
   }
   document.body.addEventListener("click", function(e){
     var btn = e.target.closest("button"), id = btn && btn.id;
-    if (id === "b-edit") { stopInbox(); setPlaying(false); editing = true; mode = "list"; render(); updateBar(); window.scrollTo(0, 0); }
+    if (id === "b-edit") { stopInbox(); setPlaying(false); editing = true; mode = "list"; EDIDX = 0; render(); updateBar(); window.scrollTo(0, 0); }
+    else if (id === "b-guests") { stopInbox(); setPlaying(false); mode = "guests"; render(); window.scrollTo(0, 0); }
     else if (id === "b-inbox") { setPlaying(false); mode = "inbox"; render(); window.scrollTo(0, 0); }
     else if (id === "b-cancel") { if (dirty) location.reload(); else { editing = false; mode = "play"; render(); updateBar(); } }
     else if (id === "b-save" && dirty && !busy) save(btn);
