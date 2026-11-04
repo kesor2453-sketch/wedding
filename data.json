@@ -145,12 +145,12 @@
       "i": "clock"
     },
     {
-      "k": "wishes",
+      "k": "date",
       "l": "ជូនពរ",
       "i": "chat"
     },
     {
-      "k": "venue",
+      "k": "gift",
       "l": "ទីតាំង",
       "i": "pin"
     }
