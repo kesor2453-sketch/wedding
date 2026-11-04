@@ -131,8 +131,8 @@
     "om43": "កញ្ញា រ៉ុម លីនដា"
   },
   "guide": "none",
-  "ornament": "khmer",
-  "textFx": "zoom",
+  "ornament": "euro",
+  "textFx": "blur",
   "nav": [
     {
       "k": "date",
@@ -155,5 +155,6 @@
       "i": "pin"
     }
   ],
-  "schedStyle": "line"
+  "schedStyle": "line",
+  "particles": "hearts"
 }
