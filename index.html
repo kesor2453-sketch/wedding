@@ -353,6 +353,53 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .seal-n .amp{display:block; font-size:26px}
 .gate.open .seal{opacity:0; transform:scale(1.15)}
 @keyframes sealIn{from{opacity:0; transform:scale(.85); filter:blur(4px)}}
+/* envelope */
+.gate.env{background:radial-gradient(ellipse at 50% 40%, var(--glow), var(--silk-deep)); perspective:1200px; transition:opacity .9s ease}
+.env-wrap{position:absolute; left:50%; top:54%; width:min(84%, 360px); aspect-ratio:1.45; transform:translate(-50%,-50%); transition:transform 1s cubic-bezier(.6,0,.2,1)}
+.env-back,.env-front,.env-flap{position:absolute; inset:0; border-radius:6px}
+.env-back{background:linear-gradient(var(--deep2, var(--silk-deep)), var(--silk)); box-shadow:0 30px 50px -20px rgba(0,0,0,.7)}
+.env-front{background:linear-gradient(160deg, var(--silk), var(--silk-deep)); clip-path:polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%); z-index:3; border-bottom:2px solid var(--gold)}
+.env-front::after{content:""; position:absolute; inset:0; background:linear-gradient(to top right, transparent 49.6%, rgba(217,178,95,.7) 50%, transparent 50.4%), linear-gradient(to top left, transparent 49.6%, rgba(217,178,95,.7) 50%, transparent 50.4%); clip-path:polygon(0 100%, 50% 52%, 100% 100%)}
+.env-flap{z-index:4; background:linear-gradient(var(--glow), var(--silk)); clip-path:polygon(0 0, 100% 0, 50% 58%); transform-origin:top; transition:transform .8s cubic-bezier(.5,0,.3,1), z-index 0s .4s; border-top:2px solid var(--gold)}
+.env-seal{position:absolute; left:50%; top:52%; z-index:5; width:46px; height:46px; margin:-23px; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle at 35% 30%, #ffe3a3, var(--gold) 55%, #8a5f1c); color:#5c0c1c; box-shadow:0 4px 10px rgba(0,0,0,.5); animation:sealIn .8s cubic-bezier(.2,.8,.3,1.4) both .1s; transition:transform .5s ease, opacity .5s ease}
+.env-seal svg{width:22px; height:22px}
+.env-card{position:absolute; left:6%; right:6%; top:6%; bottom:6%; z-index:2; border-radius:4px; background:var(--silk); border:1px solid var(--gold); outline:1px solid rgba(217,178,95,.4); outline-offset:-6px; display:flex; align-items:center; justify-content:center; text-align:center; transition:transform 1.2s cubic-bezier(.5,0,.25,1), z-index 0s .6s}
+.env-card-in{display:flex; flex-direction:column; align-items:center; gap:4px; padding:10px; transform:scale(.62)}
+.env-card .crest{width:180px}.env-card .seal-n{font-size:22px}
+.gate.env.s1 .env-seal{transform:scale(1.4); opacity:0}
+.gate.env.s1 .env-flap{transform:rotateX(180deg); z-index:1}
+.gate.env.s2 .env-card{transform:translateY(-62%); z-index:6}
+.gate.env.s3 .env-wrap{transform:translate(-50%,-50%) scale(2.6)}
+.gate.env.s3{opacity:0}
+/* theatre curtain */
+.gate.cur{background:transparent}
+.drape{position:absolute; top:0; bottom:0; width:52%; z-index:1; background:repeating-linear-gradient(90deg, rgba(0,0,0,.28) 0 6px, rgba(255,255,255,.06) 12px, rgba(0,0,0,.2) 22px, rgba(0,0,0,.32) 28px), linear-gradient(var(--silk), var(--silk-deep)); box-shadow:inset 0 -30px 40px rgba(0,0,0,.35); transition:transform 1.8s cubic-bezier(.7,0,.2,1), border-radius 1.8s ease}
+.drape.l{left:0; transform-origin:top left; border-right:2px solid var(--gold)}
+.drape.r{right:0; transform-origin:top right; border-left:2px solid var(--gold)}
+.drape::after{content:""; position:absolute; left:0; right:0; bottom:0; height:10px; background:repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 10px)}
+.tassel{position:absolute; top:46%; width:12px; height:46px; border-radius:6px 6px 3px 3px; background:linear-gradient(var(--gold-soft), var(--gold)); box-shadow:0 2px 4px rgba(0,0,0,.5)}
+.drape.l .tassel{right:-7px}.drape.r .tassel{left:-7px}
+.valance{position:absolute; top:0; left:0; right:0; height:54px; z-index:3; background:linear-gradient(var(--silk), var(--silk-deep)); border-bottom:2px solid var(--gold); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px; border-radius:4px 4px 50% 50% / 4px 4px 18px 18px; transition:transform 1.6s ease .4s}
+.valance .rule{width:70%}
+.gate.cur .seal{z-index:4}
+.gate.cur.open .drape.l{transform:translateX(-78%) scaleX(.45) skewY(4deg); border-radius:0 0 80% 0}
+.gate.cur.open .drape.r{transform:translateX(78%) scaleX(.45) skewY(-4deg); border-radius:0 0 0 80%}
+.gate.cur.open .valance{transform:translateY(-110%)}
+.gate.cur.open .seal{opacity:0; transform:scale(1.15)}
+/* lotus bloom */
+@property --hole{syntax:"<length-percentage>"; inherits:false; initial-value:0%}
+.gate.blo{background:radial-gradient(circle at 50% 46%, var(--glow), var(--silk-deep) 70%); --hole:0%;
+  -webkit-mask:radial-gradient(circle at 50% 40%, transparent var(--hole), #000 calc(var(--hole) + 2%)); mask:radial-gradient(circle at 50% 40%, transparent var(--hole), #000 calc(var(--hole) + 2%))}
+.blo-flower{position:absolute; left:50%; top:40%; width:0; height:0}
+.blo-flower .pt{position:absolute; left:-17px; top:-74px; width:34px; height:74px; transform-origin:50% 100%; border-radius:50% 50% 50% 50% / 70% 70% 30% 30%; background:linear-gradient(to top, var(--gold), var(--gold-soft) 70%, #fff8e1); opacity:.92; box-shadow:0 0 14px rgba(240,215,154,.35); transform:rotate(var(--a)) scale(0); animation:petal 1.6s cubic-bezier(.2,.8,.25,1.2) both; animation-delay:calc(.2s + var(--d))}
+@keyframes petal{to{transform:rotate(var(--a)) scale(1)}}
+.blo-core{position:absolute; left:-16px; top:-16px; width:32px; height:32px; border-radius:50%; background:radial-gradient(circle, #fffbe8, var(--gold)); box-shadow:0 0 30px 10px rgba(255,230,160,.6); animation:sealIn 1s ease both 1s}
+.blo-ring{position:absolute; left:50%; top:40%; width:10px; height:10px; margin:-5px; border-radius:50%; border:2px solid var(--gold-soft); animation:ring 2.2s ease-out infinite .9s; opacity:0}
+@keyframes ring{0%{transform:scale(1); opacity:.9} 100%{transform:scale(40); opacity:0}}
+.blo-seal{top:auto; bottom:14%; height:auto; inset:auto 0 14% 0}
+.gate.blo.open{animation:holeOpen 1.25s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes holeOpen{from{--hole:0%; opacity:1} 85%{opacity:1} to{--hole:120%; opacity:0}}
+@media (prefers-reduced-motion:reduce){.gate{display:none}}
 .gate .burst{position:absolute; inset:0; width:100%; height:100%; z-index:3}
 .ivid{position:absolute; inset:0; z-index:8; background:#000; border-radius:4px; overflow:hidden; transition:opacity .7s ease}
 .ivid video{width:100%; height:100%; object-fit:cover; border:0; max-height:none; border-radius:0}
@@ -519,6 +566,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .gtools input{font:15px var(--f-body); padding:10px 12px; border-radius:999px; border:1px solid rgba(126,200,184,.6); background:var(--silk-deep); color:var(--ivory); width:100%}
 .chips{display:flex; gap:6px; flex-wrap:wrap}
 .chips button{font:13px var(--f-body); padding:6px 14px; border-radius:999px; border:1px solid rgba(217,178,95,.5); background:none; color:var(--ink-soft); cursor:pointer}
+.chips.sort span{font-size:13px; color:var(--ink-soft); align-self:center}
 .chips button.on{background:var(--gold); color:var(--on-gold); border-color:var(--gold)}
 .glist{display:flex; flex-direction:column; gap:6px; text-align:left}
 .grow{display:grid; grid-template-columns:auto 1fr; grid-template-areas:"no name" "btns btns"; gap:4px 10px; align-items:center; padding:8px 10px; border-radius:10px; background:rgba(var(--shade),.45); border:1px solid rgba(217,178,95,.25)}
@@ -534,8 +582,21 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
 .gb.tg{background:#229ED9}.gb.ms{background:linear-gradient(135deg,#00B2FF,#006AFF 55%,#A033FF)}.gb.ig{background:linear-gradient(45deg,#F58529,#DD2A7B 50%,#8134AF)}
 .gb.gqr{background:linear-gradient(135deg, var(--gold), #a8802f); color:#2a1606}
 .gb.cp{background:transparent; color:var(--edit); border:1px dashed var(--edit)}
+.editing-row{border-color:var(--edit)!important}
+.editing-row input{width:100%; font:15px var(--f-body); padding:8px 10px; border-radius:8px; border:1px solid var(--edit); background:var(--silk-deep); color:var(--ivory)}
+.gb.ok2{background:var(--edit); color:#0b2a24; padding:0 12px; font-family:var(--f-body)}
+.gb.cp{font-size:14px}
 .gb.del{background:transparent; color:#f3b0a0; border:1px dashed rgba(243,176,160,.6); font-size:16px}
 .gb.del.armed{font-size:12px; background:#a33; color:#fff; border-color:#a33}
+.big-eyebrow{font-family:var(--f-display); font-size:calc(clamp(20px, 6.2vw, 26px) * var(--ts)); line-height:1.7; color:var(--gold-soft); text-wrap:balance}
+@supports (width:1cqw){.big-eyebrow{font-size:calc(clamp(20px, 6.6cqw, 34px) * var(--ts))}}
+.presets{display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:10px}
+.pre{display:flex; flex-direction:column; gap:6px; padding:6px; border-radius:12px; border:1px solid transparent; background:none; cursor:pointer; color:var(--ink-soft); font:12px var(--f-body)}
+.pre-art{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; height:92px; border-radius:10px; background:radial-gradient(ellipse at 50% 20%, color-mix(in srgb, var(--pb) 70%, #fff 30%), var(--pb) 55%, var(--pd)); border:1px solid var(--pg); outline:1px solid color-mix(in srgb, var(--pg) 45%, transparent); outline-offset:-6px; color:var(--pg); overflow:hidden}
+.pre-art .pc{width:78%; height:auto}
+.pre-art i{font-style:normal; font-size:15px; color:var(--pt); line-height:1.5}
+.pre.on{border-color:var(--edit); background:rgba(126,200,184,.12)}
+.pre.on .pre-art::after{content:"✓"; position:absolute; top:4px; right:7px; color:var(--pt); font-size:14px}
 .order{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
 .order li{display:flex; align-items:center; gap:6px; padding:6px 8px; border:1px solid rgba(126,200,184,.45); border-radius:8px}
 .order li.off{opacity:.55}
@@ -611,6 +672,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     if (!f || loadedFonts[f]) return; loadedFonts[f] = 1;
     var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(f).replace(/%20/g, "+") + "&display=swap"; document.head.appendChild(l);
   }
+  function loadPresetFonts(){ PRESETS.forEach(function(p){ loadFont(p.fontDisplay); }); }
   function fontOk(list, f){ return list.some(function(x){ return x[0] === f; }); }
   // content is designed for a ~380px-wide phone; scale it to the real card width so it fills a tablet or computer and fits a small phone
   function fitScale(){
@@ -717,7 +779,30 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   var KCREST='<svg class="lotus crest" viewBox="-110 0 220 52" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+H+'</svg>';
   var R='<path d="M16 0H104"/>'+kleaf(10,3,70,0.45,true)+kleaf(24,2,80,0.35,false)+'<path d="M104 0L110-3L116 0L110 3Z" fill="currentColor" stroke="none"/>';
   var KRULE='<svg class="rule" viewBox="-120 -14 240 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><g>'+R+'</g><g transform="scale(-1 1)">'+R+'</g>'+kleaf(0,4,0,0.55,true)+'</svg>';
-  var ORN = {euro: {CORNERS: CORNERS, CREST: CREST, RULE: RULE}, khmer: {CORNERS: ["tl","tr","bl","br"].map(function(c){ return '<svg class="corner c-' + c + '" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + KCORNER + "</svg>"; }).join(""), CREST: KCREST, RULE: KRULE}};
+  // two more sets: fine lines (modern) and lotus flowers
+  // two more original ornament sets: "minimal" (fine lines) and "lotus" (lotus flowers)
+  var LOTUS_F = function(x,y,s){ return '<g transform="translate('+x+' '+y+') scale('+s+')"><path d="M0-14C-4-9-4-2 0 4 4-2 4-9 0-14Z" fill="currentColor" fill-opacity=".35"/><path d="M0 4C-6 1-10-4-11-10-5-9-1-4 0 4Z"/><path d="M0 4C6 1 10-4 11-10 5-9 1-4 0 4Z"/><path d="M0 4C-8 4-14 1-17-4-10-5-4-1 0 4Z" opacity=".8"/><path d="M0 4C8 4 14 1 17-4 10-5 4-1 0 4Z" opacity=".8"/></g>'; };
+  var MCORNER='<path d="M8 72V8H72"/><path d="M14 66V14H66" opacity=".5"/><path d="M8 8L16 16" /><path d="M14 20h10M20 14v10" opacity=".7"/><path d="M4 8L8 4L12 8L8 12Z" fill="currentColor" stroke="none"/><circle cx="72" cy="8" r="1.6" fill="currentColor" stroke="none"/><circle cx="8" cy="72" r="1.6" fill="currentColor" stroke="none"/>';
+  var MCREST='<svg class="lotus crest" viewBox="-110 0 220 30" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true"><path d="M-100 15H-14M14 15H100"/><path d="M-100 20H-40M40 20H100" opacity=".45"/><path d="M0 4L9 15L0 26L-9 15Z"/><path d="M0 9L4 15L0 21L-4 15Z" fill="currentColor" stroke="none"/><circle cx="-104" cy="15" r="2" fill="currentColor" stroke="none"/><circle cx="104" cy="15" r="2" fill="currentColor" stroke="none"/></svg>';
+  var MRULE='<svg class="rule" viewBox="-120 -8 240 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true"><path d="M-112 0H-10M10 0H112"/><path d="M0-5L5 0L0 5L-5 0Z" fill="currentColor" stroke="none"/><circle cx="-116" cy="0" r="1.6" fill="currentColor" stroke="none"/><circle cx="116" cy="0" r="1.6" fill="currentColor" stroke="none"/></svg>';
+  var LCORNER='<path d="M6 74V30C6 16 16 6 30 6H74"/><path d="M12 68V32C12 20 20 12 32 12H68" opacity=".5"/>'+LOTUS_F(24,26,1.05).replace('translate(24 26) scale(1.05)','translate(24 26) rotate(-45) scale(1.05)')+'<circle cx="74" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="6" cy="74" r="2" fill="currentColor" stroke="none"/><path d="M44 6c4 4 4 8 0 10M6 44c4 4 8 4 10 0" opacity=".7"/>';
+  var LCREST='<svg class="lotus crest" viewBox="-110 0 220 46" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+LOTUS_F(0,30,1.6)+'<path d="M-24 37H-100M24 37H100"/><path d="M-30 32C-44 26-58 30-66 37M30 32C44 26 58 30 66 37" opacity=".7"/>'+LOTUS_F(-70,34,.55)+LOTUS_F(70,34,.55)+'<circle cx="-104" cy="37" r="2" fill="currentColor" stroke="none"/><circle cx="104" cy="37" r="2" fill="currentColor" stroke="none"/></svg>';
+  var LRULE='<svg class="rule" viewBox="-120 -14 240 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M-112 3H-18M18 3H112"/>'+LOTUS_F(0,3,.8)+'<circle cx="-116" cy="3" r="1.6" fill="currentColor" stroke="none"/><circle cx="116" cy="3" r="1.6" fill="currentColor" stroke="none"/></svg>';
+  function cornerSet(pth){ return ["tl","tr","bl","br"].map(function(c){ return '<svg class="corner c-' + c + '" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + pth + "</svg>"; }).join(""); }
+  var ORN = {euro: {CORNERS: CORNERS, CREST: CREST, RULE: RULE}, khmer: {CORNERS: cornerSet(KCORNER), CREST: KCREST, RULE: KRULE}, minimal: {CORNERS: cornerSet(MCORNER), CREST: MCREST, RULE: MRULE}, lotus: {CORNERS: cornerSet(LCORNER), CREST: LCREST, RULE: LRULE}};
+  // ready-made looks: one tap sets colour, ornaments, heading font, falling flowers and the guide picture together
+  var PRESETS = [
+    {id: "royal", n: "ក្រហមមាសប្រពៃណី", theme: "silk", ornament: "khmer", fontDisplay: "Moul", particles: "petals", guide: "lotus"},
+    {id: "forest", n: "បៃតងព្រៃមាស", theme: "jade", ornament: "euro", fontDisplay: "Moulpali", particles: "sparks", guide: "dove"},
+    {id: "blush", n: "ផ្កាឈូកស្រាល", theme: "blush", ornament: "lotus", fontDisplay: "Bokor", particles: "petals", guide: "hearts"},
+    {id: "noir", n: "ខ្មៅមាសទំនើប", theme: "black", ornament: "minimal", fontDisplay: "Koulen", particles: "sparks", guide: "spark"},
+    {id: "navy", n: "ខៀវរាជវាំង", theme: "navy", ornament: "euro", fontDisplay: "Preahvihear", particles: "jasmine", guide: "rings"},
+    {id: "vintage", n: "ក្រែមវីនធីជ", theme: "sand", ornament: "euro", fontDisplay: "Moul", particles: "jasmine", guide: "lotus"},
+    {id: "lotus", n: "ផ្កាឈូកខៀវបៃតង", theme: "teal", ornament: "lotus", fontDisplay: "Moulpali", particles: "petals", guide: "lotus"},
+    {id: "plum", n: "ស្វាយរាជវង្ស", theme: "plum", ornament: "khmer", fontDisplay: "Taprom", particles: "hearts", guide: "hearts"},
+    {id: "sky", n: "ខៀវស្រាលស្រស់", theme: "sky", ornament: "minimal", fontDisplay: "Kdam Thmor Pro", particles: "jasmine", guide: "dove"},
+    {id: "rose", n: "ផ្កាកុលាបចាស់", theme: "rose", ornament: "lotus", fontDisplay: "Moul", particles: "petals", guide: "hearts"}
+  ];
   function applyOrnament(){ var o = ORN[S.ornament] || ORN.euro; CORNERS = o.CORNERS; CREST = o.CREST; RULE = o.RULE; DIV = '<div class="divider">' + RULE + "</div>"; LOTUS = CREST; }
   function svg(d, fill){ return '<svg viewBox="0 0 24 24" ' + (fill ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"') + ">" + d + "</svg>"; }
   var I = {
@@ -816,13 +901,13 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var cdInline = !cdBg && !isHidden("countdown");
     B.parents = function(){
     // 2 parents + invitation
-    P.push(page(DIV + '<div class="parents">' + ["g","b"].map(function(side){
+    P.push(page(CREST + T("div", "eyebrow", "big-eyebrow") + DIV + '<div class="parents">' + ["g","b"].map(function(side){
       return '<div><span class="side">' + (side === "g" ? "ខាងកូនប្រុស" : "ខាងកូនស្រី") + "</span>" + S.parents[side].map(function(_, i){ return T("p","parents." + side + "." + i); }).join("") + "</div>";
     }).join("") + "</div>" + T("div","invite","invite-text") + DIV, {dur: sec + 3}));
     };
     B.date = function(){
     // 3 couple + date; the countdown gets its own photo scene when a photo exists
-    P.push(page('<div class="couple"><div><div class="role">កូនប្រុសនាម</div>' + T("span","groom","moul") + '</div><div><div class="role">កូនស្រីនាម</div>' + T("span","bride","moul") + "</div></div>" +
+    P.push(page(T("div", "eyebrow", "big-eyebrow") + DIV + '<div class="couple"><div><div class="role">កូនប្រុសនាម</div>' + T("span","groom","moul") + '</div><div><div class="role">កូនស្រីនាម</div>' + T("span","bride","moul") + "</div></div>" +
       '<div class="when"><span>ដែលនឹងប្រព្រឹត្តទៅនៅ</span>' + T("span","dateKh","moul") + T("span","lunar","lunar") + T("span","timeKh") + "</div>" + (cdInline ? CD : ""), {dur: sec + 2, tag: "date"}));
     };
     B.countdown = function(){
@@ -972,6 +1057,8 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
       P.push(page("<h2>ការកំណត់ (មើលឃើញតែអ្នក)</h2>" +
         '<label for="in-start">ម៉ោងចាប់ផ្តើម (សម្រាប់រាប់ថយក្រោយ និងប្រតិទិន)<input id="in-start" type="datetime-local" data-f="start" value="' + esc(S.start) + '"></label>' +
         '<label for="in-end">ម៉ោងបញ្ចប់<input id="in-end" type="datetime-local" data-f="end" value="' + esc(S.end) + '"></label>' +
+        '<div class="themes-wrap"><span>គំរូធៀបរួចស្រេច (ចុចម្តង ប្តូរពណ៌ ក្បាច់ ពុម្ពអក្សរ និងផ្កាធ្លាក់ព្រមគ្នា)</span><div class="presets">' + PRESETS.map(function(pr){ var t = themeOf(pr.theme), on = S.preset === pr.id;
+          return '<button type="button" class="pre' + (on ? " on" : "") + '" data-act="preset" data-p="' + pr.id + '" style="--pb:' + t.silk + ';--pd:' + t.deep + ';--pg:' + t.gold + ';--pt:' + t.ivory + '"><span class="pre-art">' + (ORN[pr.ornament] || ORN.euro).CREST.replace('class="lotus crest"', 'class="pc"') + '<i style="font-family:\'' + pr.fontDisplay + '\', Moul, serif">' + esc(S.groom.split(" ").pop() || "") + " &amp; " + esc(S.bride.split(" ").pop() || "") + "</i></span><small>" + pr.n + "</small></button>"; }).join("") + "</div></div>" +
         '<div class="themes-wrap"><span>ពណ៌ធៀប</span><div class="themes" role="radiogroup" aria-label="ពណ៌ធៀប">' + Object.keys(THEMES).map(function(k){ var t = themeOf(k);
           return '<button type="button" class="sw' + (S.theme === k ? " on" : "") + '" data-act="theme" data-t="' + k + '" role="radio" aria-checked="' + (S.theme === k) + '"><i style="background:linear-gradient(135deg,' + t.glow + "," + t.silk + " 55%," + t.deep + ');box-shadow:inset 0 0 0 3px ' + t.gold + '"></i><small>' + THEMES[k].n + "</small></button>"; }).join("") +
           '<label class="sw' + (S.theme === "custom" ? " on" : "") + '" for="in-ccol"><i style="background:' + esc(S.customColor || "#7a1f3d") + '"><input id="in-ccol" type="color" data-f="customColor" value="' + esc(S.customColor || "#7a1f3d") + '"></i><small>ពណ៌ផ្ទាល់ខ្លួន</small></label></div>' +
@@ -984,7 +1071,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<label for="in-ititle">ចំណងជើងទំព័របើក (ចុះបន្ទាត់បាន)<textarea id="in-ititle" rows="2" data-f="introTitle">' + esc(S.introTitle || "សិរីសួស្តី\nអាពាហ៍ពិពាហ៍") + "</textarea></label>" +
         '<label for="in-gdef">ឈ្មោះលើស្លាក (ពេលបើកលីងគ្មានឈ្មោះ)<input id="in-gdef" data-f="guestDefault" value="' + esc(S.guestDefault || "ភ្ញៀវកិត្តិយស") + '"></label>' +
         '<div class="row">រូបទំព័របើក (បញ្ឈរ)៖ ' + (S.introPhoto ? '<span>មានហើយ</span><button class="tool" data-act="del-intro">ដកចេញ</button>' : '<button class="tool" data-act="pick" data-target="introPhoto">+ ដាក់រូប</button><span class="lunar">(បើមិនដាក់ ប្រើរូបគម្រប)</span>') + "</div>" +
-        '<label for="in-ofx">ចលនាពេលចុចបើកធៀប<select id="in-ofx" data-f="openFx"><option value="gate"' + (S.openFx !== "none" ? " selected" : "") + '>ទ្វារមាសបើក + ពន្លឺផ្កាភ្លើង</option><option value="none"' + (S.openFx === "none" ? " selected" : "") + ">គ្មាន (ចូលភ្លាម)</option></select></label>" +
+        '<label for="in-ofx">ចលនាពេលចុចបើកធៀប<select id="in-ofx" data-f="openFx">' + [["gate","ទ្វារមាសបើក + ពន្លឺផ្កាភ្លើង"],["envelope","ស្រោមសំបុត្របើក ធៀបរះចេញ"],["curtain","វាំងននក្រណាត់ទាញបើក"],["bloom","ផ្កាឈូករីក ហើយពន្លឺបើកធៀប"],["none","គ្មាន (ចូលភ្លាម)"]].map(function(o){ return '<option value="' + o[0] + '"' + ((S.openFx || "gate") === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" +
         '<div class="row">វីដេអូនាំចូលធៀប (បើដាក់ វាចាក់ជំនួសទ្វារ)៖ ' + (S.introVideo ? '<span>មានហើយ</span><button class="tool" data-act="del-introvideo">ដកចេញ</button>' : '<button class="tool" data-act="pick" data-target="introVideo">+ ដាក់វីដេអូ (បញ្ឈរ, ≤២៥MB)</button>') + "</div>" +
         '<label for="in-fd">ពុម្ពអក្សរចំណងជើង<select id="in-fd" data-f="fontDisplay">' + DISPLAY_FONTS.map(function(f){ return '<option value="' + f[0] + '"' + (S.fontDisplay === f[0] ? " selected" : "") + ">" + f[1] + " (" + f[0] + ")</option>"; }).join("") + '</select><span class="fprev" style="font-family:var(--f-display)">' + esc(S.groom) + " &amp; " + esc(S.bride) + "</span></label>" +
         '<label for="in-fb2">ពុម្ពអក្សរអត្ថបទ<select id="in-fb2" data-f="fontBody">' + BODY_FONTS.map(function(f){ return '<option value="' + f[0] + '"' + (S.fontBody === f[0] ? " selected" : "") + ">" + f[1] + " (" + f[0] + ")</option>"; }).join("") + '</select><span class="fprev" style="font-family:var(--f-body); font-size:15px">មានកិត្តិយសសូមគោរពអញ្ជើញ ចូលរួមពិធីអាពាហ៍ពិពាហ៍</span></label>' +
@@ -998,10 +1085,11 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<p class="lunar" style="margin:0">ប៉ះលើអក្សរណាមួយដែលមានបន្ទាត់ចុចៗ ដើម្បីកែ។ ពេលកែរួច ចុច «រក្សាទុក» ទើបភ្ញៀវឃើញ។</p>', {cls:"settings"}));
       var G = gh();
       var gsel = S.guide || "lotus";
+      loadPresetFonts();
       P.push(page("<h2>ចលនា និងរូបនាំផ្លូវ</h2>" +
         '<label for="in-tfx">ចលនាអក្សរពេលលេចឡើង<select id="in-tfx" data-f="textFx">' + [["letters","អក្សរផុសម្តងមួយៗ (ទាក់ទាញបំផុត)"],["rise","រះឡើងទន់ៗ"],["blur","ព្រិលទៅច្បាស់"],["bounce","ធ្លាក់ពីលើ លោតបន្តិច"],["zoom","ពង្រីកចេញពីកណ្តាល"],["none","គ្មាន"]].map(function(o){ return '<option value="' + o[0] + '"' + ((S.textFx || "letters") === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" +
         '<label for="in-ptc">អ្វីធ្លាក់/អណ្តែតនៅផ្ទៃខាងក្រោយ<select id="in-ptc" data-f="particles">' + [["petals","ផ្កាកុលាប/ផ្កាឈូក ធ្លាក់"],["jasmine","ផ្កាម្លិះស ធ្លាក់"],["hearts","បេះដូងធ្លាក់"],["sparks","ពន្លឺមាសអណ្តែត"],["none","គ្មាន"]].map(function(o){ return '<option value="' + o[0] + '"' + ((S.particles || "petals") === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" +
-        '<label for="in-orn">ក្បាច់លម្អ<select id="in-orn" data-f="ornament"><option value="euro"' + (S.ornament !== "khmer" ? " selected" : "") + '>ក្បាច់វល្លិ៍មាស (វីនធីជ)</option><option value="khmer"' + (S.ornament === "khmer" ? " selected" : "") + ">ក្បាច់ភ្ញី (បែបខ្មែរ)</option></select></label>" +
+        '<label for="in-orn">ក្បាច់លម្អ<select id="in-orn" data-f="ornament">' + [["euro","ក្បាច់វល្លិ៍មាស (វីនធីជ)"],["khmer","ក្បាច់ភ្ញី (បែបខ្មែរ)"],["lotus","ផ្កាឈូក"],["minimal","ខ្សែស្តើងទំនើប"]].map(function(o){ return '<option value="' + o[0] + '"' + ((S.ornament || "euro") === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" +
         '<label class="chk2" for="in-plx"><input id="in-plx" type="checkbox" data-act="parallax"' + (S.parallax === false ? "" : " checked") + '> រូបរំកិលតាមការផ្អៀងទូរស័ព្ទ (3D)</label>' +
         '<label class="chk2" for="in-shim"><input id="in-shim" type="checkbox" data-act="shimmer"' + (S.shimmer === false ? "" : " checked") + '> ពន្លឺមាសរត់លើចំណងជើង</label>' +
         '<label for="in-pfx">ចលនាពេលប្តូរទំព័រ<select id="in-pfx" data-f="pageFx">' + [["fade","រលាយចូលគ្នា"],["slide","រុញពីស្តាំទៅឆ្វេង"],["zoom","ពង្រីកចូល"],["flip","បើកដូចសៀវភៅ"],["rise","ឡើងពីក្រោម"]].map(function(o){ return '<option value="' + o[0] + '"' + ((S.pageFx || "fade") === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></label>" +
@@ -1262,7 +1350,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var go = function(){ setPlaying(true); };
     var reduce = false; try { reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
     if (S.introVideo) introVideo(go);
-    else if (S.openFx !== "none" && !reduce) { if (audio && !muted) audio.play().catch(function(){}); gate(go); }
+    else if (S.openFx !== "none" && !reduce) { if (audio && !muted) audio.play().catch(function(){}); openScene(go); }
     else go();
   }
   // the owner's own opening video, played full screen once, with a skip button
@@ -1279,6 +1367,46 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var p = v.play(); if (p && p.catch) p.catch(function(){ v.muted = true; v.play().catch(end); });
   }
   // built-in opening: golden doors with the couple's names part to reveal the first page
+  // opening scenes the owner can pick: doors, envelope, theatre curtain, blooming lotus
+  function openScene(done){
+    var fx = S.openFx || "gate";
+    if (fx === "envelope") return envelope(done);
+    if (fx === "curtain") return curtain(done);
+    if (fx === "bloom") return bloom(done);
+    return gate(done);
+  }
+  var NAMES = function(){ return '<div class="seal-n">' + esc(S.groom) + '<span class="amp">&amp;</span>' + esc(S.bride) + "</div>"; };
+  function envelope(done){
+    var slides = document.getElementById("slides"); if (!slides) return done();
+    var g = document.createElement("div"); g.className = "gate env";
+    g.innerHTML = '<div class="env-wrap"><div class="env-back"></div>' +
+      '<div class="env-card"><div class="env-card-in">' + CREST.replace("lotus crest", "crest") + '<div class="eyebrow">' + esc(S.eyebrow) + "</div>" + NAMES() + '<div class="date-big">' + esc(S.dateShort) + "</div></div></div>" +
+      '<div class="env-front"></div><div class="env-flap"></div><div class="env-seal">' + I.heart + "</div></div>" +
+      '<canvas class="burst" aria-hidden="true"></canvas>';
+    slides.appendChild(g);
+    setTimeout(function(){ g.classList.add("s1"); }, 700);          // wax seal pops, flap opens
+    setTimeout(function(){ g.classList.add("s2"); }, 1500);         // card rises out
+    setTimeout(function(){ g.classList.add("s3"); burst(g.querySelector(".burst")); }, 2900); // card fills the screen
+    setTimeout(function(){ g.remove(); done(); }, 3900);
+  }
+  function curtain(done){
+    var slides = document.getElementById("slides"); if (!slides) return done();
+    var g = document.createElement("div"); g.className = "gate cur";
+    g.innerHTML = '<div class="valance">' + RULE + '</div><div class="drape l"><i class="tassel"></i></div><div class="drape r"><i class="tassel"></i></div>' +
+      '<div class="seal">' + CREST.replace("lotus crest", "crest") + NAMES() + "</div><canvas class=\"burst\" aria-hidden=\"true\"></canvas>";
+    slides.appendChild(g); splitLetters(g);
+    setTimeout(function(){ g.classList.add("open"); burst(g.querySelector(".burst")); }, 1700);
+    setTimeout(function(){ g.remove(); done(); }, 3700);
+  }
+  function bloom(done){
+    var slides = document.getElementById("slides"); if (!slides) return done();
+    var g = document.createElement("div"); g.className = "gate blo";
+    var petals = ""; for (var i = 0; i < 12; i++) petals += '<i class="pt" style="--a:' + (i * 30) + 'deg; --d:' + (i % 2 ? .15 : 0) + 's"></i>';
+    g.innerHTML = '<div class="blo-ring"></div><div class="blo-flower">' + petals + '<b class="blo-core"></b></div><div class="seal blo-seal">' + NAMES() + "</div><canvas class=\"burst\" aria-hidden=\"true\"></canvas>";
+    slides.appendChild(g); splitLetters(g);
+    setTimeout(function(){ g.classList.add("open"); burst(g.querySelector(".burst")); }, 2200);
+    setTimeout(function(){ g.remove(); done(); }, 3500);
+  }
   function gate(done){
     var slides = document.getElementById("slides"); if (!slides) return done();
     var g = document.createElement("div"); g.className = "gate";
@@ -1399,6 +1527,7 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     else if (act === "del-music") S.music = "";
     else if (act === "del-cdphoto") S.cdPhoto = "";
     else if (act === "theme") S.theme = b.dataset.t;
+    else if (act === "preset") { var pr = PRESETS.filter(function(x){ return x.id === b.dataset.p; })[0]; if (pr) { ["theme","ornament","fontDisplay","particles","guide"].forEach(function(k){ S[k] = pr[k]; }); S.preset = pr.id; toast("បានប្តូរទៅគំរូ «" + pr.n + "»"); } }
     else if (act === "map-show") { S.mapShow = b.checked; }
     else if (act === "parallax") { S.parallax = b.checked; markDirty(); return; }
     else if (act === "shimmer") { S.shimmer = b.checked; applyTextFx(); markDirty(); return; }
@@ -1607,7 +1736,20 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   window.addEventListener("resize", function(){ if (editing) edGo(EDIDX, false); });
 
   // ---- guest links: a screen of its own, easy to search when the list is long ----
-  var GF = "all", GQ = "";
+  var GF = "all", GQ = "", GEDIT = "", GSORT = (function(){ try { return localStorage.getItem("gsort") || "abc"; } catch(e){ return "abc"; } })();
+  // rename a guest: the link (#number) stays the same, only the name on it changes
+  function renameGuest(id){
+    var inp = document.getElementById("g-ed"); if (!inp) return;
+    var nm = inp.value.trim().slice(0, 80), old = S.guests[id];
+    if (!nm) { toast("ឈ្មោះមិនអាចទទេបានទេ"); return; }
+    var dup = Object.keys(S.guests).some(function(k){ return k !== id && S.guests[k] === nm; });
+    if (dup) { toast("ឈ្មោះនេះមានរួចហើយ"); return; }
+    GEDIT = "";
+    if (nm === old) { guestList(); return; }
+    S.guests[id] = nm;
+    var lg = sentLog(); if (lg[old]) { lg[nm] = lg[old]; delete lg[old]; try { localStorage.setItem("sent", JSON.stringify(lg)); } catch(e){} }
+    guestList(); markDirty(); save({}); toast("បានកែឈ្មោះ — លីង #" + id + " នៅដដែល · កំពុងរក្សាទុក…");
+  }
   function guestsView(){
     var n = Object.keys(S.guests).length;
     return '<div class="backbar"><button class="btn" data-ui="toplay">← ' + (editing ? "ត្រលប់ទៅម៉ឺនុយកែ" : "ត្រលប់ទៅធៀប") + "</button></div>" +
@@ -1616,13 +1758,20 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
         '<label class="sr" for="g-names">ឈ្មោះភ្ញៀវ</label><textarea id="g-names" rows="5" placeholder="មួយបន្ទាត់មួយនាក់ ឬដាក់ក្បៀស&#10;លោក សុខ ដារ៉ា&#10;អ្នកនាង ចាន់ ស្រីនិច">' + esc(savedGuests()) + '</textarea>' +
         '<button class="btn solid" data-gact="add">បង្កើតលីង</button></details>' +
       '<div class="gtools"><label class="sr" for="g-q">ស្វែងរក</label><input id="g-q" type="search" placeholder="ស្វែងរកឈ្មោះ ឬលេខ…" value="' + esc(GQ) + '">' +
-        '<div class="chips">' + [["all","ទាំងអស់"],["todo","មិនទាន់ផ្ញើ"],["sent","ផ្ញើរួច"]].map(function(c){ return '<button data-gf="' + c[0] + '"' + (GF === c[0] ? ' class="on"' : "") + ">" + c[1] + "</button>"; }).join("") + "</div></div>" +
+        '<div class="chips">' + [["all","ទាំងអស់"],["todo","មិនទាន់ផ្ញើ"],["sent","ផ្ញើរួច"]].map(function(c){ return '<button data-gf="' + c[0] + '"' + (GF === c[0] ? ' class="on"' : "") + ">" + c[1] + "</button>"; }).join("") + "</div>" +
+        '<div class="chips sort"><span>តម្រៀប៖</span>' + [["abc","ក ខ គ (តាមឈ្មោះ)"],["num","#០១ #០២ (តាមលេខ)"]].map(function(c){ return '<button data-gsort="' + c[0] + '"' + (GSORT === c[0] ? ' class="on"' : "") + ">" + c[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="glist" id="g-links"></div>' +
       '<div class="row"><button class="tool" data-gact="copyall">' + I.copy + ' ចម្លងលីងដែលកំពុងបង្ហាញ</button></div>' +
       '<p class="lunar" style="margin:0">លីងទូទៅ (គ្មានឈ្មោះ)៖ ' + esc(baseUrl()) + "</p></div></div>";
   }
+  // alphabetical order by the person's name, skipping titles such as លោក / លោកស្រី / អ្នកនាង / កញ្ញា
+  var TITLES = /^(?:ឯកឧត្តម|លោកជំទាវ|អ្នកឧកញ៉ា|ឧកញ៉ា|លោកឧកញ៉ា|លោកគ្រូ|អ្នកគ្រូ|វេជ្ជបណ្ឌិត|សាស្ត្រាចារ្យ|បណ្ឌិត|លោកស្រី|លោក|អ្នកនាង|អ្នកស្រី|អ្នក|កញ្ញា|នាង|បងប្អូន|ក្រុមគ្រួសារ|និង|ព្រមទាំង|ភរិយា|ស្វាមី|Mr\.?|Mrs\.?|Ms\.?|Miss|Dr\.?)\s*/i;
+  var COLL = (function(){ try { return new Intl.Collator(["km", "en"], {sensitivity: "base", numeric: true}); } catch(e){ return null; } })();
+  function nameKey(n){ var k = String(n || "").trim(), prev; do { prev = k; k = k.replace(TITLES, ""); } while (k !== prev && k); return k || String(n || ""); }
   function guestRows(){
-    return Object.keys(S.guests).sort(function(a, b){ var na = /^\d+$/.test(a), nb = /^\d+$/.test(b); return na && nb ? a - b : na ? -1 : nb ? 1 : a < b ? -1 : 1; })
+    var byNum = function(a, b){ var na = /^\d+$/.test(a), nb = /^\d+$/.test(b); return na && nb ? a - b : na ? -1 : nb ? 1 : a < b ? -1 : 1; };
+    var byName = function(a, b){ var x = nameKey(S.guests[a]), y = nameKey(S.guests[b]), kx = /^[\u1780-\u17FF]/.test(x), ky = /^[\u1780-\u17FF]/.test(y); if (kx !== ky) return kx ? -1 : 1; var c = COLL ? COLL.compare(x, y) : (x < y ? -1 : x > y ? 1 : 0); return c || byNum(a, b); };
+    return Object.keys(S.guests).sort(GSORT === "num" ? byNum : byName)
       .map(function(id){ var nm = S.guests[id]; return {id: id, name: nm, link: baseUrl() + "?g=" + id, text: "សូមគោរពអញ្ជើញ " + nm + " ចូលរួមពិធីអាពាហ៍ពិពាហ៍ " + S.groom + " និង " + S.bride}; });
   }
   function guestList(){
@@ -1636,8 +1785,11 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
     var B2 = function(via, i, cls, label, inner){ return '<button class="gb ' + cls + '" data-gact="share" data-via="' + via + '" data-i="' + i + '" title="' + label + '" aria-label="' + label + '">' + inner + "</button>"; };
     box.innerHTML = LINKS.map(function(l, i){
       var done = log[l.name];
+      if (GEDIT === l.id) return '<div class="grow editing-row"><span class="gno">#' + esc(l.id) + '</span><div class="gname"><label class="sr" for="g-ed">កែឈ្មោះ</label><input id="g-ed" value="' + esc(l.name) + '" maxlength="80"></div>' +
+        '<div class="gbtns"><button class="gb ok2" data-gact="ren-ok" data-id="' + esc(l.id) + '">✓ រក្សាទុក</button><button class="gb cp" data-gact="ren-no">បោះបង់</button></div></div>';
       return '<div class="grow' + (done ? " sent" : "") + '"><span class="gno">#' + esc(l.id) + '</span><div class="gname"><b>' + esc(l.name) + "</b>" + (done ? '<small class="ok">✓ ' + esc(done) + "</small>" : "") + "</div>" +
         '<div class="gbtns">' + B2("telegram", i, "tg", "Telegram", "TG") + B2("messenger", i, "ms", "Messenger", "M") + B2("instagram", i, "ig", "Instagram", "IG") + B2("qr", i, "gqr", "QR មានឈ្មោះ", I.qr) + B2("copy", i, "cp", "ចម្លង", I.copy) +
+        '<button class="gb cp" data-gact="ren" data-id="' + esc(l.id) + '" title="កែឈ្មោះ" aria-label="កែឈ្មោះ">✎</button>' +
         '<button class="gb del" data-gact="del" data-id="' + esc(l.id) + '" title="លុប" aria-label="លុប">×</button></div></div>';
     }).join("");
   }
@@ -1659,17 +1811,22 @@ a.tool{text-decoration:none; display:inline-flex; align-items:center; gap:4px}
   }
   app.addEventListener("click", function(e){
     if (mode !== "guests") return;
+    var so = e.target.closest("[data-gsort]"); if (so) { GSORT = so.dataset.gsort; try { localStorage.setItem("gsort", GSORT); } catch(err){} app.querySelectorAll("[data-gsort]").forEach(function(x){ x.classList.toggle("on", x === so); }); guestList(); return; }
     var f = e.target.closest("[data-gf]"); if (f) { GF = f.dataset.gf; app.querySelectorAll("[data-gf]").forEach(function(x){ x.classList.toggle("on", x === f); }); guestList(); return; }
     var b = e.target.closest("[data-gact]"); if (!b) return;
     var a = b.dataset.gact;
     if (a === "add") addGuests();
     else if (a === "share") sendVia(b.dataset.via, +b.dataset.i, b);
+    else if (a === "ren") { GEDIT = b.dataset.id; guestList(); var ie = document.getElementById("g-ed"); if (ie) { ie.focus(); ie.select(); } }
+    else if (a === "ren-ok") renameGuest(b.dataset.id);
+    else if (a === "ren-no") { GEDIT = ""; guestList(); }
     else if (a === "copyall") copyText(LINKS.map(function(l){ return l.name + "\n" + l.link; }).join("\n\n"), b);
     else if (a === "del") {
       if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "លុប?"; b.classList.add("armed"); setTimeout(function(){ if (b.isConnected) { delete b.dataset.armed; b.textContent = "×"; b.classList.remove("armed"); } }, 3000); return; }
       delete S.guests[b.dataset.id]; guestList(); markDirty(); save({}); toast("បានលុប — កំពុងរក្សាទុក…");
     }
   });
+  app.addEventListener("keydown", function(e){ if (e.target.id === "g-ed") { if (e.key === "Enter") { e.preventDefault(); renameGuest(GEDIT); } else if (e.key === "Escape") { GEDIT = ""; guestList(); } } });
   app.addEventListener("input", function(e){ if (mode === "guests" && e.target.id === "g-q") { GQ = e.target.value; guestList(); } if (mode === "guests" && e.target.id === "g-names") { try { localStorage.setItem("guests", e.target.value); } catch(err){} } });
   function makeLinks(){ guestList(); }
   var VIA = {telegram: "Telegram", messenger: "Messenger", instagram: "Instagram"};
