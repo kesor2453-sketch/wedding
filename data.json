@@ -88,7 +88,7 @@
   "introVideo": "",
   "qrLogo": "",
   "guideImg": "",
-  "theme": "navy",
+  "theme": "plum",
   "story": [
     {
       "date": "",
@@ -122,7 +122,7 @@
     "video": true
   },
   "openFx": "gate",
-  "fontDisplay": "Moul",
+  "fontDisplay": "Taprom",
   "fontBody": "Battambang",
   "titleScale": 100,
   "textScale": 100,
@@ -151,8 +151,8 @@
     "08": "លោក ឈន ចំរឿន",
     "09": "លោក អ៊ុង គីមឡេង"
   },
-  "guide": "none",
-  "ornament": "euro",
+  "guide": "hearts",
+  "ornament": "khmer",
   "textFx": "blur",
   "nav": [
     {
@@ -177,5 +177,7 @@
     }
   ],
   "schedStyle": "line",
-  "particles": "hearts"
+  "particles": "hearts",
+  "shimmer": false,
+  "preset": "plum"
 }
